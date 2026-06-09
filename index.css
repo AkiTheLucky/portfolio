@@ -1,0 +1,685 @@
+/* index.css */
+
+/* =========================================================
+   DESIGN TOKENS (GLOBAL KNOBS)
+   ---------------------------------------------------------
+   These variables define the character of the site.
+   Changing these should ripple through everything.
+   ========================================================= */
+
+:root {
+  --bg: #f7f4ef;
+  --surface: #ffffff;
+  --text: #171717;
+  --muted: #2c0707;
+  --border: #f8f0e7;
+  --accent: #111111;
+  --accent-soft: #f0ebe5;
+
+  --font: Inter, Satoshi, system-ui, -apple-system,
+          BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+
+  --content-max-width: 68rem;
+
+  /*
+    Added:
+    Shared card styling tokens.
+    This keeps repeated visual values consistent.
+  */
+  --radius-md: 1rem;
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.04);
+
+  
+/* NEW: shared glass style */
+  --glass-radius: 1.75rem;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.45);
+  --glass-bg:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.58),
+      rgba(255, 255, 255, 0.28)
+    );
+  --glass-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.18);
+  --glass-blur: 8px;
+
+}
+
+/* =========================================================
+   GLOBAL RESET / NORMALIZATION
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SCROLL BEHAVIOR
+   ========================================================= */
+
+
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: var(--font-size-base);
+  
+  /*
+    Smooth anchor-link movement.
+  */
+  scroll-behavior: auto;
+  
+  
+  /*
+    Gentle section snapping.
+    Use "mandatory" if you want a stronger iPhone-like page snap.
+  */
+  
+
+  /*
+    Offset for future fixed nav/header.
+    Set to 0px if you never add one.
+  */
+  scroll-padding-top: 0px;
+}
+
+
+
+
+body {
+  margin: 0;
+
+  /*
+    Fixed:
+    The original code used var(--font-sans), but --font-sans
+    was never defined in :root.
+
+    Changed to:
+    var(--font), which is the variable that actually exists.
+  */
+  font-family: var(--font);
+
+  line-height: var(--line-height-base);
+  color: var(--text);
+  background-color: var(--bg);
+  overflow-x: hidden;
+
+  
+  /*
+    Added:
+    Reduces scroll chaining/bounce behavior in some browsers.
+  */
+  overscroll-behavior-y: contain;
+
+}
+
+main {
+  display: block;
+}
+
+/* =========================================================
+   TYPOGRAPHY RHYTHM
+   ========================================================= */
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+p {
+  margin-top: var(--space-sm);
+  color: var(--text);
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  line-height: 1.15;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+h2 {
+  font-size: 1.6rem;
+  line-height: 1.25;
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+
+h3 {
+  font-size: 1.1rem;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+/* =========================================================
+   SECTION LAYOUT
+   ========================================================= */
+
+section {
+  min-height: 100vh;
+  padding-block: var(--space-2xl) 0;
+
+  
+  /*
+    Centers the section content vertically.
+  */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+/*
+  Changed:
+  Added .lab-content to this shared layout list
+  so the Lab section aligns with the rest of the page.
+*/
+
+.section-header {
+    margin-inline: auto;
+    width: fit-content;
+}
+
+
+/* Shared glass look */
+
+.project-card__inner,
+.project-detail__content {
+  border: var(--glass-border);
+  border-radius: var(--glass-radius);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Hero keeps its special layout sizing */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  max-width: min(42rem, calc(100% - 2rem));
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+
+.capability-grid,
+.project-list,
+.lab-content,
+#about {
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+#hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  
+  /*
+    Added:
+    Keeps the hero background visually isolated behind the hero content.
+  */
+  isolation: isolate;
+
+}
+
+.hero-background {
+  position: absolute;
+  /* old
+  inset: 0;
+  */
+  
+  top: 0vh;
+  right: 0;
+  bottom: 0vh;
+  left: 0;
+
+  z-index: 0;
+
+  /*
+    Changed:
+    The old opacity/filter combination made the animation almost invisible.
+
+    Before:
+      opacity: 0.3;
+      filter: blur(24px);
+
+    Problem:
+      The JS particles were already very transparent.
+      Then CSS reduced their opacity again.
+      Then blur spread them into the beige background.
+
+    New:
+      Higher opacity and softer blur.
+      This keeps it ambient but actually visible.
+  */
+  opacity: 0.9;
+  filter: blur(2px);
+
+  /*
+    Keeps this decorative layer from blocking clicks.
+  */
+  pointer-events: none;
+}
+
+#hero-flow {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+
+
+
+/*
+    Added:
+    Soft glass highlight behind the hero text.
+
+    Why:
+    The animated canvas can reduce text contrast.
+    This panel gently separates the text from the background
+    without feeling like a harsh card.
+  */
+  width: fit-content;
+  max-width: min(42rem, calc(100% - 2rem));
+
+  padding: clamp(1.25rem, 3vw, 2rem);
+
+  border: 0px solid rgba(255, 255, 255, 0.45);
+  border-radius: 1.75rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.58),
+      rgba(255, 255, 255, 0.28)
+    );
+
+  /*
+    This is the key “liquid glass” part.
+    It blurs whatever is behind the box.
+  */
+  backdrop-filter: blur(8px) saturate(1);
+  -webkit-backdrop-filter: blur(8px) saturate(1);
+
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.18);
+}
+
+
+
+
+.hero-meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.hero-subtitle {
+  margin-top: var(--space-sm);
+  color: var(--muted);
+}
+
+
+.hero-subtitle a {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero-subtitle a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+
+  width: 100%;
+  height: 1px;
+
+  background: currentColor;
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  transition: transform 0.25s ease;
+}
+
+.hero-description {
+  max-width: 42ch;
+  font-size: 1rem;
+  color: var(--text);
+  margin-top: var(--space-sm);
+}
+
+
+.hero-links {
+  display: flex;
+  gap: clamp(1rem, 4vw, 4rem);
+  margin-top: 0.75rem;
+}
+
+
+
+.hero-subtitle a:hover::after,
+.hero-subtitle a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+
+/* =========================================================
+   SECTION HEADERS
+   ========================================================= */
+
+.section-header h2 {
+  margin: 0;
+  padding: 20px;
+  align-items: center;
+}
+
+/* =========================================================
+   CAPABILITIES
+   ========================================================= */
+
+.capability-grid {
+  display: grid;
+
+  /*
+    Added:
+    The original grid had no columns or gap, so cards would stack
+    without intentional spacing.
+  */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--space-lg);
+}
+
+.capability {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+
+  /*
+    Added:
+    Card spacing and subtle shape so the grid looks intentional.
+  */
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+}
+
+/* =========================================================
+   PROJECTS — STANDARD HORIZONTAL MARQUEE
+   ========================================================= */
+
+#projects {
+  overflow: visible;
+}
+
+.projects-wheel {
+  position: relative;
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+  padding-top: var(--space-xl);
+  padding-bottom: 4rem;
+
+  /* marquee behavior */
+  overflow: hidden;
+
+  /* side fade */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* the moving strip */
+#projects-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: projects-marquee var(--marquee-duration, 30s) linear infinite;
+}
+
+/* pause when hovering or keyboard-focusing */
+.projects-wheel:hover #projects-track,
+.projects-wheel:focus-within #projects-track,
+#projects-track.is-paused {
+  animation-play-state: paused;
+}
+
+/* each group is one full repeated set of your cards */
+.projects-group {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--space-lg);
+  padding-right: var(--space-lg); /* creates the gap between repeats */
+  align-items: stretch;
+}
+
+/* duplicated groups should not be clickable */
+.projects-group[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+/* IMPORTANT: cards are now normal horizontal items, not absolute layers */
+.project-shell {
+  flex: 0 0 auto;
+  width: min(22rem, 80vw);
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none !important;
+  will-change: auto;
+}
+
+/* if your card/button needs full width */
+.project-card {
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.project-card__inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 18rem;
+  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  gap: 0.75rem;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.project-card:hover .project-card__inner,
+.project-card:focus-visible .project-card__inner {
+  transform: translateY(-4px);
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.project-card:focus-visible {
+  outline: none;
+}
+
+.project-card__eyebrow {
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.project-card h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.project-summary {
+  margin-top: 0;
+  color: var(--text);
+  opacity: 0.9;
+  max-width: 32ch;
+}
+
+.project-card__cta {
+  margin-top: auto;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+
+/* marquee animation */
+@keyframes projects-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-1 * var(--group-width, 0px)));
+  }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #projects-track {
+    animation: none;
+  }
+}
+
+/* -------------------------
+   Mobile
+   ------------------------- */
+
+@media (max-width: 640px) {
+  .projects-wheel {
+    padding-inline: var(--space-md);
+    padding-bottom: 16rem;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .projects-track {
+    height: 20rem;
+  }
+
+  .project-shell {
+    --card-width: clamp(14rem, 72vw, 18rem);
+  }
+
+  .project-detail {
+    width: min(26rem, calc(100vw - 1.5rem));
+  }
+}
+
+/* =========================================================
+   LAB TEASER
+   ========================================================= */
+
+#lab-teaser {
+  background-color: var(--accent-soft);
+}
+
+.lab-description {
+  max-width: 60ch;
+}
+
+.lab-link {
+  display: inline-block;
+  margin-top: var(--space-md);
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.lab-link:hover,
+.lab-link:focus-visible {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+
+
+#about {
+  max-width: none;
+}
+
+#about > .section-header,
+#about > p {
+  max-width: 80ch;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+
+/* =========================================================
+   RESPONSIVE TWEAKS
+   ========================================================= */
+
+@media (max-width: 640px) {
+  section {
+    padding-block: var(--space-xl);
+  }
+
+  .section-header,
+  .hero-content,
+  .capability-grid,
+  .project-list,
+  .lab-content,
+  #about {
+    padding-inline: var(--space-md);
+  }
+}

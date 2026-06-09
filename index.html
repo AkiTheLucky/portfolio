@@ -1,0 +1,512 @@
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <!--
+
+    Basic document metadata.
+
+    Keep this minimal; SEO and social tags can come later.
+
+  -->
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+
+    Page title: short, factual, not marketing.
+
+    Your name + what you do is enough.
+
+  -->
+
+  <title>Akram Naser — Automation &amp; Small Systems</title>
+
+  <!--
+
+    Stylesheet reference.
+
+    ALL visual decisions live in index.css.
+
+  -->
+
+  <link rel="stylesheet" href="index.css" />
+
+</head>
+
+<body>
+
+  <!--
+
+    Main landmark for accessibility and structure.
+
+    Everything meaningful lives inside <main>.
+
+  -->
+
+  <main>
+
+    <!-- =====================================================
+
+         HERO SECTION
+
+         Purpose:
+
+         - First impression
+
+         - Calm, confident statement of intent
+
+         - Subtle ambient background
+
+         ===================================================== -->
+
+    <section id="hero">
+
+      <!--
+
+        Decorative background container.
+
+        Changed:
+
+        - Added aria-hidden="true" to the canvas because it is decorative.
+
+          This prevents screen readers from treating it as meaningful content.
+
+      -->
+
+      <div class="hero-background" aria-hidden="true">
+
+        <canvas id="hero-flow"></canvas>
+
+      </div>
+
+      <!--
+
+        Foreground content container.
+
+        This is what must remain readable and dominant.
+
+      -->
+
+      <div class="hero-content">
+
+        <!-- Muted academic / geographic context -->
+
+        <p class="hero-meta">
+
+          International Economics (M.Sc.) · Basel / Zürich
+
+        </p>
+
+        <!-- Primary thesis -->
+
+        <h1 class="hero-title">
+
+          Akram Naser
+
+        </h1>
+
+        <p class="hero-description">
+
+        I build small systems that reduce repetitive work, improve data quality,
+
+        and make operational processes easier. Looking to do more of that in my career.
+
+        </p>
+
+        <!-- Supporting descriptors -->
+
+        <div class="hero-subtitle hero-links">
+
+            <a href="https://github.com/AkiTheLucky" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+
+            <a href="https://linkedin.com/in/akram-naser" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+
+    <!-- =====================================================
+
+         SELECTED PROJECTS
+
+         Purpose:
+
+         - Proof of value
+
+         - Show judgment through selection
+
+         ===================================================== -->
+
+<section id="projects">
+
+  <header class="section-header">
+
+    <h2>Projects</h2>
+
+  </header>
+
+  <div class="projects-wheel" aria-label="Selected projects carousel">
+
+    <div class="projects-track" id="projects-track">
+
+      <article class="project-shell" data-project>
+
+        <button
+
+          class="project-card"
+
+          type="button"
+
+          aria-expanded="false"
+
+        >
+
+          <span class="project-card__inner">
+
+            <span class="project-card__eyebrow">Automation</span>
+
+            <h3>Workflow automation in Excel</h3>
+
+            <p class="project-summary">
+
+              Reduced manual file handling and highlighted semantic data issues
+
+              using VBA automation and validation logic.
+
+            </p>
+
+            <span class="project-card__cta">Open project</span>
+
+          </span>
+
+        </button>
+
+        <div class="project-detail" hidden>
+
+          <div class="project-detail__content">
+
+            <div class="project-detail__header">
+
+              <h4>Workflow automation in Excel</h4>
+
+              <button class="project-detail__close" type="button" aria-label="Close project details">
+
+                Close
+
+              </button>
+
+            </div>
+
+            <p>
+
+              This project focused on reducing repetitive spreadsheet work and
+
+              making recurring checks more reliable. I used VBA automation to
+
+              handle file processing, built validation logic to catch semantic
+
+              mismatches, and reduced the amount of manual intervention needed.
+
+            </p>
+
+            <ul class="project-detail__list">
+
+              <li><strong>Tools:</strong> Excel, VBA</li>
+
+              <li><strong>Focus:</strong> automation, validation, error reduction</li>
+
+              <li><strong>Value:</strong> less manual work, more trust in recurring processes</li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </article>
+
+      <article class="project-shell" data-project>
+
+        <button
+
+          class="project-card"
+
+          type="button"
+
+          aria-expanded="false"
+
+        >
+
+          <span class="project-card__inner">
+
+            <span class="project-card__eyebrow">Documents</span>
+
+            <h3>Free CV creator with Overleaf</h3>
+
+            <p class="project-summary">
+
+              Leverage AI and Overleaf to create beautiful CVs for free.
+
+            </p>
+
+            <span class="project-card__cta">Open project</span>
+
+          </span>
+
+        </button>
+
+        <div class="project-detail" hidden>
+
+          <div class="project-detail__content">
+
+            <div class="project-detail__header">
+
+              <h4>Free CV creator with Overleaf</h4>
+
+              <button class="project-detail__close" type="button" aria-label="Close project details">
+
+                Close
+
+              </button>
+
+            </div>
+
+            <p>
+
+              A lightweight approach to helping users create cleaner CVs without
+
+              relying on expensive template generators. The workflow combines AI
+
+              guidance with Overleaf to produce structured, ATS-friendly output.
+
+            </p>
+
+            <ul class="project-detail__list">
+
+              <li><strong>Tools:</strong> Overleaf, LaTeX, AI workflows</li>
+
+              <li><strong>Focus:</strong> formatting clarity, accessibility, ATS-friendliness</li>
+
+              <li><strong>Value:</strong> high-quality CVs without paid template lock-in</li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </article>
+
+      <article class="project-shell" data-project>
+
+        <button
+
+          class="project-card"
+
+          type="button"
+
+          aria-expanded="false"
+
+        >
+
+          <span class="project-card__inner">
+
+            <span class="project-card__eyebrow">Learning</span>
+
+            <h3>Boot.dev learnings</h3>
+
+            <p class="project-summary">
+
+              AI agents, static site generators, and Python-focused projects
+
+              that helped sharpen implementation skills.
+
+            </p>
+
+            <span class="project-card__cta">Open project</span>
+
+          </span>
+
+        </button>
+
+        <div class="project-detail" hidden>
+
+          <div class="project-detail__content">
+
+            <div class="project-detail__header">
+
+              <h4>Boot.dev learnings</h4>
+
+              <button class="project-detail__close" type="button" aria-label="Close project details">
+
+                Close
+
+              </button>
+
+            </div>
+
+            <p>
+
+              A set of smaller technical exercises and experiments exploring
+
+              Python, static site generation, AI-agent patterns, and
+
+              problem-solving routines. These projects are more about discipline,
+
+              iteration, and learning how to build with confidence.
+
+            </p>
+
+            <ul class="project-detail__list">
+
+              <li><strong>Tools:</strong> Python, Git, CLI, static site tooling</li>
+
+              <li><strong>Focus:</strong> systems thinking, implementation practice</li>
+
+              <li><strong>Value:</strong> better coding fluency and stronger technical judgment</li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+    <!-- =====================================================
+
+         LAB TEASER
+
+         Purpose:
+
+         - Invite curious readers to opt in
+
+         - Do NOT run heavy JS here
+
+         ===================================================== -->
+
+    <section id="lab-teaser">
+
+      <!--
+
+        Changed:
+
+        - Wrapped lab text and link in .lab-content.
+
+          This lets the CSS apply the same max-width and horizontal padding
+
+          as the other sections.
+
+      -->
+
+      <div class="lab-content">
+
+        <header class="section-header">
+
+          <h2>Lab</h2>
+
+        </header>
+
+        <p class="lab-description">
+
+          The fun side of my portfolio :) please enjoy!
+
+        </p>
+
+        <!--
+
+          Changed:
+
+          - Changed href from "/lab.html" to "lab.html".
+
+          - "/lab.html" points to the root of a domain.
+
+          - "lab.html" works better for local files and subfolder deployments.
+
+        -->
+
+        <a href="lab.html" class="lab-link">
+
+          Enter here
+
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+
+         ABOUT
+
+         Purpose:
+
+         - Human context
+
+         - Quiet credibility
+
+         ===================================================== -->
+
+    <section id="about">
+
+      <header class="section-header">
+
+        <h2>About</h2>
+
+      </header>
+
+      <p>
+
+        Although I have a background in International Economics, I always enjoyed understanding problems
+
+        and getting a birds-eye view. I started writing code because spreadsheets and manual processes
+
+        weren’t good enough for me. I enjoy turning repetitive, error-prone tasks into something automatic.
+
+      </p>
+
+    </section>
+
+  </main>
+
+  <!--
+
+    Script reference.
+
+    ALL logic, animation, and interaction lives in index.js.
+
+    Changed:
+
+    - Added defer.
+
+    - This allows the browser to load the script without blocking HTML parsing.
+
+    - DOMContentLoaded is still used inside JS, so this is safe.
+
+  -->
+
+  <script src="index.js" defer></script>
+
+</body>
+
+</html>
+
