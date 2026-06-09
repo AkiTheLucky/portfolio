@@ -150,10 +150,12 @@ p {
 }
 
 h1 {
-  font-size: clamp(2.2rem, 4vw, 3rem);
+  /* Tamed the scaling so it doesn't blow out on large screens */
+  font-size: clamp(2rem, 3.5vw, 3rem); 
   line-height: 1.15;
   font-weight: 600;
   margin-bottom: var(--space-md);
+  letter-spacing: -0.02em; /* Makes large headers look tighter and more premium */
 }
 
 h2 {
@@ -174,7 +176,7 @@ h3 {
    ========================================================= */
 
 section {
-  min-height: 100vh;
+  min-height: 100svh;
   padding-block: var(--space-2xl) 0;
 
   
@@ -216,8 +218,9 @@ section {
   position: relative;
   z-index: 1;
   width: fit-content;
-  max-width: min(42rem, calc(100% - 2rem));
-  padding: clamp(1.25rem, 3vw, 2rem);
+  /* Slightly narrowed the box so text wraps more naturally */
+  max-width: min(38rem, calc(100% - 2rem));
+  padding: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 
@@ -436,83 +439,37 @@ section {
   box-shadow: var(--shadow-soft);
 }
 
+
 /* =========================================================
-   PROJECTS — STANDARD HORIZONTAL MARQUEE
+   PROJECTS — GRID LAYOUT
    ========================================================= */
 
 #projects {
-  overflow: visible;
+  overflow: hidden;
 }
 
 .projects-wheel {
-  position: relative;
   max-width: var(--content-max-width);
   margin-inline: auto;
   padding-inline: var(--space-lg);
   padding-top: var(--space-xl);
   padding-bottom: 4rem;
-
-  /* marquee behavior */
-  overflow: hidden;
-
-  /* side fade */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
 }
 
-/* the moving strip */
+/* Turns the track into a responsive grid */
 #projects-track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-  animation: projects-marquee var(--marquee-duration, 30s) linear infinite;
+  display: grid;
+  /* Automatically wraps cards. Cards will be at least 22rem wide, filling available space */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--space-xl);
+  width: 100%;
 }
 
-/* pause when hovering or keyboard-focusing */
-.projects-wheel:hover #projects-track,
-.projects-wheel:focus-within #projects-track,
-#projects-track.is-paused {
-  animation-play-state: paused;
-}
-
-/* each group is one full repeated set of your cards */
-.projects-group {
-  display: flex;
-  flex-shrink: 0;
-  gap: var(--space-lg);
-  padding-right: var(--space-lg); /* creates the gap between repeats */
-  align-items: stretch;
-}
-
-/* duplicated groups should not be clickable */
-.projects-group[aria-hidden="true"] {
-  pointer-events: none;
-}
-
-/* IMPORTANT: cards are now normal horizontal items, not absolute layers */
 .project-shell {
-  flex: 0 0 auto;
-  width: min(22rem, 80vw);
-  position: relative;
-  top: auto;
-  left: auto;
-  transform: none !important;
-  will-change: auto;
+  width: 100%;
+  height: 100%;
 }
 
-/* if your card/button needs full width */
 .project-card {
   width: 100%;
   height: 100%;
@@ -531,13 +488,10 @@ section {
 .project-card__inner {
   display: flex;
   flex-direction: column;
-  min-height: 18rem;
-  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  min-height: 22rem; /* Increased to make cards more prominent */
+  padding: clamp(1.5rem, 3vw, 2rem);
   gap: 0.75rem;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .project-card:hover .project-card__inner,
@@ -549,19 +503,16 @@ section {
     inset 0 -1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.project-card:focus-visible {
-  outline: none;
-}
-
 .project-card__eyebrow {
   font-size: 0.85rem;
   color: var(--muted);
   letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .project-card h3 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   line-height: 1.3;
   font-weight: 600;
   color: var(--text);
@@ -571,32 +522,15 @@ section {
   margin-top: 0;
   color: var(--text);
   opacity: 0.9;
-  max-width: 32ch;
 }
 
 .project-card__cta {
   margin-top: auto;
   color: var(--muted);
   font-size: 0.95rem;
+  font-weight: 500;
 }
 
-
-/* marquee animation */
-@keyframes projects-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-1 * var(--group-width, 0px)));
-  }
-}
-
-/* respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  #projects-track {
-    animation: none;
-  }
-}
 
 /* -------------------------
    Mobile
@@ -653,15 +587,17 @@ section {
    ========================================================= */
 
 
-#about {
-  max-width: none;
-}
-
 #about > .section-header,
 #about > p {
-  max-width: 80ch;
+  max-width: 60ch; /* Narrowed for better readability */
   margin-inline: auto;
   padding-inline: var(--space-lg);
+  text-align: center; /* Centers the ending thought */
+}
+
+#about p {
+  font-size: 1.1rem;
+  line-height: 1.8;
 }
 
 
