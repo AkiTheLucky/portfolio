@@ -602,8 +602,67 @@ section {
 
 
 /* =========================================================
-   RESPONSIVE TWEAKS
+   drawer appstore idea
    ========================================================= */
+/* The native dialog element */
+.project-modal {
+  width: min(90vw, 50rem);
+  max-height: 85vh;
+  margin: auto;
+  padding: 0;
+  border: var(--glass-border);
+  border-radius: var(--glass-radius);
+  background: var(--surface); /* Keep it solid for readability, or use glass */
+  box-shadow: var(--glass-shadow);
+  color: var(--text);
+}
+
+/* This styles the dark overlay behind the modal */
+.project-modal::backdrop {
+  background: rgba(23, 23, 23, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.project-modal__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.project-modal__body {
+  padding: var(--space-lg);
+  overflow-y: auto; /* Allows scrolling if the code gets long */
+}
+
+/* Make your code blocks look nice */
+.project-modal__body pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: var(--space-md);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+
 
 @media (max-width: 640px) {
   section {

@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Akram Naser — Automation &amp; Small Systems</title>
-
   <link rel="stylesheet" href="index.css" />
 </head>
 <body>
@@ -19,7 +17,7 @@
         <p class="hero-meta">International Economics (M.Sc.) · Basel / Zürich</p>
         
         <h1 class="hero-title">Akram Naser</h1>
-        <p class="hero-description">I build small systems that reduce repetitive work, improve data quality, and make operational processes easier. Looking to do more of that in my career.</p>
+        <p class="hero-description">I build small systems that reduce repetitive work, improve data quality, and make processes easier. Looking to do more of that in my career.</p>
         
         <div class="hero-subtitle hero-links">
           <a href="https://github.com/AkiTheLucky" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
@@ -45,30 +43,33 @@
                   Reduced manual file handling and highlighted semantic data issues
                   using VBA automation and validation logic.
                 </p>
-                <span class="project-card__cta">Open project</span>
               </span>
             </button>
-            <div class="project-detail" hidden>
-              <div class="project-detail__content">
-                <div class="project-detail__header">
-                  <h4>Workflow automation in Excel</h4>
-                  <button class="project-detail__close" type="button" aria-label="Close project details">
-                    Close
-                  </button>
+
+            <dialog class="project-modal">
+              <div class="project-modal__content">
+                <header class="project-modal__header">
+                  <h3>Workflow automation in Excel</h3>
+                  <button class="close-modal-btn" aria-label="Close">✕</button>
+                </header>
+                
+                <div class="project-modal__body">
+                  <h4>The Issue</h4>
+                  <p>Manual data entry was causing cascading semantic errors...</p>
+                  
+                  <h4>The Idea & Solution</h4>
+                  <p>Automate the ingestion pipeline and flag discrepancies before they hit the database.</p>
+                  
+                  <h4>Implementation & Code</h4>
+                  <pre><code>
+' Example VBA snippet here
+Sub ProcessData()
+    ' Magic happens here
+End Sub
+                  </code></pre>
                 </div>
-                <p>
-                  This project focused on reducing repetitive spreadsheet work and
-                  making recurring checks more reliable. I used VBA automation to
-                  handle file processing, built validation logic to catch semantic
-                  mismatches, and reduced the amount of manual intervention needed.
-                </p>
-                <ul class="project-detail__list">
-                  <li><strong>Tools:</strong> Excel, VBA</li>
-                  <li><strong>Focus:</strong> automation, validation, error reduction</li>
-                  <li><strong>Value:</strong> less manual work, more trust in recurring processes</li>
-                </ul>
               </div>
-            </div>
+            </dialog>
           </article>
 
           <article class="project-shell" data-project>
@@ -79,29 +80,33 @@
                 <p class="project-summary">
                   Leverage AI and Overleaf to create beautiful CVs for free.
                 </p>
-                <span class="project-card__cta">Open project</span>
               </span>
             </button>
-            <div class="project-detail" hidden>
-              <div class="project-detail__content">
-                <div class="project-detail__header">
-                  <h4>Free CV creator with Overleaf</h4>
-                  <button class="project-detail__close" type="button" aria-label="Close project details">
-                    Close
-                  </button>
+
+            <dialog class="project-modal">
+              <div class="project-modal__content">
+                <header class="project-modal__header">
+                  <h3>Free CV creator with Overleaf</h3>
+                  <button class="close-modal-btn" aria-label="Close">✕</button>
+                </header>
+                
+                <div class="project-modal__body">
+                  <h4>The Idea & Solution</h4>
+                  <p>
+                    A lightweight approach to helping users create cleaner CVs without
+                    relying on expensive template generators. The workflow combines AI
+                    guidance with Overleaf to produce structured, ATS-friendly output.
+                  </p>
+                  
+                  <h4>Project Details</h4>
+                  <ul>
+                    <li><strong>Tools:</strong> Overleaf, LaTeX, AI workflows</li>
+                    <li><strong>Focus:</strong> formatting clarity, accessibility, ATS-friendliness</li>
+                    <li><strong>Value:</strong> high-quality CVs without paid template lock-in</li>
+                  </ul>
                 </div>
-                <p>
-                  A lightweight approach to helping users create cleaner CVs without
-                  relying on expensive template generators. The workflow combines AI
-                  guidance with Overleaf to produce structured, ATS-friendly output.
-                </p>
-                <ul class="project-detail__list">
-                  <li><strong>Tools:</strong> Overleaf, LaTeX, AI workflows</li>
-                  <li><strong>Focus:</strong> formatting clarity, accessibility, ATS-friendliness</li>
-                  <li><strong>Value:</strong> high-quality CVs without paid template lock-in</li>
-                </ul>
               </div>
-            </div>
+            </dialog>
           </article>
 
           <article class="project-shell" data-project>
@@ -113,30 +118,34 @@
                   AI agents, static site generators, and Python-focused projects
                   that helped sharpen implementation skills.
                 </p>
-                <span class="project-card__cta">Open project</span>
               </span>
             </button>
-            <div class="project-detail" hidden>
-              <div class="project-detail__content">
-                <div class="project-detail__header">
-                  <h4>Boot.dev learnings</h4>
-                  <button class="project-detail__close" type="button" aria-label="Close project details">
-                    Close
-                  </button>
+
+            <dialog class="project-modal">
+              <div class="project-modal__content">
+                <header class="project-modal__header">
+                  <h3>Boot.dev learnings</h3>
+                  <button class="close-modal-btn" aria-label="Close">✕</button>
+                </header>
+                
+                <div class="project-modal__body">
+                  <h4>The Idea & Solution</h4>
+                  <p>
+                    A set of smaller technical exercises and experiments exploring
+                    Python, static site generation, AI-agent patterns, and
+                    problem-solving routines. These projects are more about discipline,
+                    iteration, and learning how to build with confidence.
+                  </p>
+
+                  <h4>Project Details</h4>
+                  <ul>
+                    <li><strong>Tools:</strong> Python, Git, CLI, static site tooling</li>
+                    <li><strong>Focus:</strong> systems thinking, implementation practice</li>
+                    <li><strong>Value:</strong> better coding fluency and stronger technical judgment</li>
+                  </ul>
                 </div>
-                <p>
-                  A set of smaller technical exercises and experiments exploring
-                  Python, static site generation, AI-agent patterns, and
-                  problem-solving routines. These projects are more about discipline,
-                  iteration, and learning how to build with confidence.
-                </p>
-                <ul class="project-detail__list">
-                  <li><strong>Tools:</strong> Python, Git, CLI, static site tooling</li>
-                  <li><strong>Focus:</strong> systems thinking, implementation practice</li>
-                  <li><strong>Value:</strong> better coding fluency and stronger technical judgment</li>
-                </ul>
               </div>
-            </div>
+            </dialog>
           </article>
 
         </div>

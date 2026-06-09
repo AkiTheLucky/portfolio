@@ -23,7 +23,7 @@
 
   initHeroFlowField();
 
-  initProjectsMarquee();
+  initProjectModals();
 
   }
 
@@ -427,7 +427,41 @@ const angleFromCenter = Math.atan2(dy, dx);
 
   }
 
+function initProjectModals() {
+  const shells = document.querySelectorAll('.project-shell');
 
+  shells.forEach(shell => {
+    const cardBtn = shell.querySelector('.project-card');
+    const modal = shell.querySelector('.project-modal');
+    const closeBtn = shell.querySelector('.close-modal-btn');
+
+    // Open modal when card is clicked
+    cardBtn.addEventListener('click', () => {
+      modal.showModal();
+      document.body.style.overflow = 'hidden'; // Stop background scrolling
+    });
+
+    // Close modal when X is clicked
+    closeBtn.addEventListener('click', () => {
+      modal.close();
+      document.body.style.overflow = ''; // Restore scrolling
+    });
+
+    // Optional: Close when clicking the backdrop outside the modal
+    modal.addEventListener('click', (e) => {
+      const dialogDimensions = modal.getBoundingClientRect();
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+        modal.close();
+        document.body.style.overflow = '';
+      }
+    });
+  });
+}
 
 })();
 
