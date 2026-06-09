@@ -7,6 +7,8 @@
    Changing these should ripple through everything.
    ========================================================= */
 
+
+
 :root {
   --bg: #f7f4ef;
   --surface: #ffffff;
@@ -57,6 +59,32 @@
   --glass-blur: 8px;
 
 }
+
+
+/* DARK THEME  */
+
+[data-theme="dark"] {
+  --bg: #121212;
+  --surface: #1e1e1e;
+  --text: #e8e8e8;
+  --muted: #999999;
+  --border: #2a2a2a;
+  --accent: #ffffff;
+  --accent-soft: #222222;
+
+  /* Dark mode glass effect */
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+  --glass-bg: linear-gradient(
+      135deg,
+      rgba(40, 40, 40, 0.58),
+      rgba(20, 20, 20, 0.28)
+    );
+  --glass-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
 
 /* =========================================================
    GLOBAL RESET / NORMALIZATION
@@ -298,47 +326,21 @@ section {
   display: block;
 }
 
+
 .hero-content {
   position: relative;
   z-index: 1;
-
-
-
-/*
-    Added:
-    Soft glass highlight behind the hero text.
-
-    Why:
-    The animated canvas can reduce text contrast.
-    This panel gently separates the text from the background
-    without feeling like a harsh card.
-  */
   width: fit-content;
-  max-width: min(42rem, calc(100% - 2rem));
+  max-width: min(38rem, calc(100% - 2rem));
+  padding: clamp(1.5rem, 4vw, 2.5rem);
 
-  padding: clamp(1.25rem, 3vw, 2rem);
-
-  border: 0px solid rgba(255, 255, 255, 0.45);
-  border-radius: 1.75rem;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.58),
-      rgba(255, 255, 255, 0.28)
-    );
-
-  /*
-    This is the key “liquid glass” part.
-    It blurs whatever is behind the box.
-  */
-  backdrop-filter: blur(8px) saturate(1);
-  -webkit-backdrop-filter: blur(8px) saturate(1);
-
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.65),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.18);
+  /* REPLACE THE HARDCODED VALUES WITH THESE VARIABLES */
+  border: var(--glass-border);
+  border-radius: var(--glass-radius);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1);
+  box-shadow: var(--glass-shadow);
 }
 
 
@@ -677,4 +679,58 @@ section {
   #about {
     padding-inline: var(--space-md);
   }
+}
+
+/* Ensure the links and the new slider line up perfectly */
+.hero-links {
+  align-items: center;
+}
+
+/* 1. The pill-shaped background (Light Mode) */
+.theme-btn {
+  width: 44px;
+  height: 24px;
+  border-radius: 24px;
+  background-color: #d1cbbd; /* A muted greyish-beige for light mode */
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease;
+  padding: 0;
+  display: inline-block;
+}
+
+/* 2. The white sliding circle */
+/* 2. The white sliding circle with the Light Mode Emoji */
+.theme-btn::after {
+  content: "☀️"; /* Your light mode emoji */
+  
+  /* Center the emoji perfectly inside the ball */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px; /* Keeps the emoji small enough to fit */
+
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+/* 3. The pill background when Dark Mode is ON */
+[data-theme="dark"] .theme-btn {
+  /* This is the violet from your canvas particles! 
+     (Change to #34c759 if you want exact Apple Green) */
+  background-color: #232229; 
+}
+
+
+/* 4. Slide the circle AND swap to the Dark Mode Emoji */
+[data-theme="dark"] .theme-btn::after {
+  transform: translateX(20px);
+  content: "🌙"; /* Swaps to the moon! */
 }

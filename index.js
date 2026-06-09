@@ -25,6 +25,7 @@
 
   initProjectModals();
 
+  initThemeToggle();
   }
 
   function initHeroFlowField() {
@@ -108,8 +109,10 @@
       This is still based on your beige background.
 
     */
+    /* old fade color 
+    const FADE_COLOR = "rgba(247, 244, 239, 0.045)";
+    */
 
-    const FADE_COLOR = "rgba(247, 244, 239, 0.045)";
 
     function createParticle(index) {
 
@@ -155,93 +158,59 @@
 
     }
 
-    function resize() {
+function resize() {
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      width = parent.clientWidth;
+      height = parent.clientHeight;
+      if (width === 0 || height === 0) return;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      
+      // NEW: Check theme and paint the correct background
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      ctx.fillStyle = isDark ? "#121212" : "#f7f4ef";
+      ctx.fillRect(0, 0, width, height);
 
-      const parent = canvas.parentElement;
+      if (particles.length === 0) {
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+          particles.push(createParticle(i));
+        }
+      } else {
+        for (const p of particles) {
+          resetParticle(p);
+        }
+      }
+    }
 
-      if (!parent) return;
-
-      width = parent.clientWidth;
-
-      height = parent.clientHeight;
-
-      if (width === 0 || height === 0) return;
-
-      canvas.width = Math.floor(width * dpr);
-
-      canvas.height = Math.floor(height * dpr);
-
-      canvas.style.width = width + "px";
-
-      canvas.style.height = height + "px";
-
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      /*
-
-        Changed:
-
-        Paint the canvas with the real background color once after resize.
-
-        This prevents the canvas from starting transparent.
-
-      */
-
-      ctx.fillStyle = "#f7f4ef";
-
-      ctx.fillRect(0, 0, width, height);
-
-      if (particles.length === 0) {
-
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-
-          particles.push(createParticle(i));
-
-        }
-
-      } else {
-
-        /*
-
-          Added:
-
-          If the screen is resized, reset particles so they do not all
-
-          remain outside the new canvas bounds.
-
-        */
-
-        for (const p of particles) {
-
-          resetParticle(p);
-
-        }
-
-      }
-
-    }
 
     window.addEventListener("resize", resize);
 
     resize();
 
-    function animate() {
 
-      animationFrameId = requestAnimationFrame(animate);
 
-      if (width === 0 || height === 0) return;
 
-      /*
 
+
+    function animate() {
+      animationFrameId = requestAnimationFrame(animate);
+      if (width === 0 || height === 0) return;
+      // NEW: Dynamic fade color based on theme
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      ctx.fillStyle = isDark ? "rgba(18, 18, 18, 0.08)" : "rgba(247, 244, 239, 0.045)";
+      ctx.fillRect(0, 0, width, height);
+
+      
+      
+      /*
         Fade previous frame.
-
         This creates smooth trails.
-
       */
 
-      ctx.fillStyle = FADE_COLOR;
-
-      ctx.fillRect(0, 0, width, height);
 
       for (const p of particles) {
 
@@ -465,3 +434,31 @@ function initProjectModals() {
 
 })();
 
+
+function initThemeToggle() {
+  const toggleBtn = document.getElementById("theme-toggle");
+  if (!toggleBtn) return;
+
+  // 1. Check if they already have a preference saved, or if their OS is in dark mode
+  const currentTheme = localStorage.getItem("theme");
+  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+  // If they saved 'dark' before, or if they have no save but their OS is dark, turn it on
+  if (currentTheme == "dark" || (!currentTheme && prefersDarkScheme.matches)) {
+    document.documentElement.setAttribute("data-theme", "dark");
+  }
+
+  // 2. Listen for clicks on the button
+  toggleBtn.addEventListener("click", function () {
+    // If it's currently dark, make it light
+    if (document.documentElement.getAttribute("data-theme") === "dark") {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.setItem("theme", "light"); // Save choice
+    } 
+    // Otherwise, make it dark
+    else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark"); // Save choice
+    }
+  });
+}
