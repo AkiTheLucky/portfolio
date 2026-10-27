@@ -1,0 +1,14 @@
+---
+import ContactForm from '../../components/ContactForm';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Contact — Akram Naser" description="Contact Akram Naser about roles, process improvement, AI adoption, or building something together.">
+  <header class="page-hero shell">
+    <p class="section-kicker">Contact</p>
+    <h1>Start with what is on your mind.</h1>
+    <p>A role, a process that needs improving, an AI question, or something we could make together. A few sentences are enough.</p>
+  </header>
+  <div class="page-content shell">
+    <ContactForm client:load endpoint={import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || ''} />
+  </div>
+</BaseLayout>

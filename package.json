@@ -1,0 +1,34 @@
+{
+  "name": "akram-naser-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "latest",
+    "@astrojs/react": "latest",
+    "@astrojs/sitemap": "latest",
+    "@fontsource-variable/fraunces": "latest",
+    "@fontsource-variable/manrope": "latest",
+    "@gsap/react": "latest",
+    "astro": "latest",
+    "gsap": "latest",
+    "motion": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "^6.0.3",
+    "vitest": "latest"
+  }
+}

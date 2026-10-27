@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import ClickCounter from '../../components/ClickCounter';
+import FermiGame from '../../components/FermiGame';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const questions = (await getCollection('fermi')).map((entry) => ({
+  id: entry.id,
+  ...entry.data,
+  explanation: entry.body?.trim() || '',
+}));
+---
+<BaseLayout title="Play — Akram Naser" description="A daily Fermi estimation and a needlessly collaborative click counter.">
+  <header class="page-hero shell">
+    <p class="section-kicker">The playroom</p>
+    <h1>Small things, properly made.</h1>
+    <p>A daily estimation exercise and a button that turns doing very little into a shared achievement.</p>
+  </header>
+  <section class="page-content shell" aria-labelledby="play-experiences-heading">
+    <h2 id="play-experiences-heading" class="sr-only">Interactive experiences</h2>
+    <div class="card-grid">
+      <FermiGame client:load questions={questions} />
+      <ClickCounter client:load endpoint={import.meta.env.PUBLIC_CLICK_COUNTER_URL || ''} />
+    </div>
+  </section>
+</BaseLayout>

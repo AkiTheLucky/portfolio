@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { href } from '../../config/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<BaseLayout title={`${post.data.title} — Akram Naser`} description={post.data.description}>
+  <article class="page-content shell prose">
+    <p class="prose-meta"><a href={href('blog')}>Blog</a> · <time datetime={post.data.pubDate.toISOString()}>{new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(post.data.pubDate)}</time></p>
+    <h1>{post.data.title}</h1>
+    <p>{post.data.description}</p>
+    <Content />
+  </article>
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { href } from '../../config/site';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+<BaseLayout title="Blog — Akram Naser" description="Notes on processes, AI adoption, and building useful things.">
+  <header class="page-hero shell">
+    <p class="section-kicker">Blog</p>
+    <h1>Notes from the margin.</h1>
+    <p>Writing about process improvement, AI adoption, and building useful things.</p>
+  </header>
+  <div class="page-content shell">
+    {posts.length > 0 ? (
+      <div class="blog-list">
+        {posts.map((post) => (
+          <a class="blog-item" href={href(`blog/${post.id}`)}>
+            <time datetime={post.data.pubDate.toISOString()}>{new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(post.data.pubDate)}</time>
+            <div><h2>{post.data.title}</h2><p>{post.data.description}</p></div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-state">
+        <h2>The first post is being written.</h2>
+        <p>No filler, no artificial publishing schedule. The MDX template is ready for the first real idea.</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

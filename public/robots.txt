@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akithelucky.github.io/portfolio/sitemap-index.xml

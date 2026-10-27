@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { href } from '../config/site';
+---
+<BaseLayout title="Page not found — Akram Naser">
+  <div class="page-hero shell">
+    <p class="section-kicker">404</p>
+    <h1>This door goes nowhere.</h1>
+    <p>The page may have moved, or the address may be wrong.</p>
+    <a class="button button--primary" href={href()}>Back to the beginning</a>
+  </div>
+</BaseLayout>

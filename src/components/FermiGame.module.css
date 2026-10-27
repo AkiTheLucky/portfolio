@@ -1,0 +1,34 @@
+.game { height: 100%; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-raised); box-shadow: var(--shadow); }
+.header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+.kicker { margin-bottom: 0.65rem; color: var(--ink-soft); font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.header h3 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.5rem); }
+.streak { display: grid; flex: 0 0 auto; text-align: right; }
+.streak strong { color: var(--terracotta); font-family: var(--display); font-size: 2.4rem; font-weight: 500; line-height: 1; }
+.streak span { color: var(--ink-soft); font-size: 0.62rem; }
+.question { max-width: 30ch; margin-bottom: 2rem; font-family: var(--display); font-size: clamp(1.55rem, 3vw, 2.3rem); line-height: 1.15; }
+.form { display: grid; gap: 0.55rem; }
+.form label { font-size: 0.72rem; font-weight: 700; }
+.inputRow { display: flex; gap: 0.65rem; }
+.inputRow input { min-width: 0; flex: 1; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--paper); color: var(--ink); padding: 0.75rem 1rem; }
+.inputRow button { flex: 0 0 auto; }
+.inputRow button:disabled { cursor: not-allowed; opacity: 0.6; }
+.error { min-height: 1.2rem; margin: 0; color: var(--burgundy); font-size: 0.72rem; }
+.result { margin-top: 1rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+.resultTop { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.resultTop > span { color: var(--forest-bright); font-size: 0.75rem; font-weight: 800; }
+.resultTop strong { font-family: var(--display); font-size: 2rem; font-weight: 500; }
+.resultTop small { color: var(--ink-soft); font-family: var(--body); font-size: 0.65rem; font-weight: 500; }
+.result p { margin-block: 1rem; color: var(--ink-soft); font-size: 0.82rem; }
+.result details { color: var(--ink-soft); font-size: 0.75rem; }
+.result summary { cursor: pointer; font-weight: 700; }
+.note { margin: 0.5rem 0 0; color: var(--ink-soft); font-size: 0.72rem; }
+.compact { box-shadow: none; }
+.compact .header { margin-bottom: 1.5rem; }
+.compact .question { font-size: clamp(1.35rem, 2.5vw, 1.9rem); }
+@media (max-width: 520px) {
+  .header { align-items: flex-start; }
+  .header h3 { max-width: 13ch; }
+  .inputRow { align-items: stretch; flex-direction: column; }
+  .inputRow input { min-height: 3rem; }
+  .resultTop { align-items: flex-start; flex-direction: column; gap: 0.25rem; }
+}
