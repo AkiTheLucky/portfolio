@@ -66,6 +66,34 @@ The Worker uses a SQLite-backed Durable Object, which is available on Cloudflare
 
 Without the Worker URL, personal clicks still work and the interface clearly reports that global syncing is not connected.
 
+## Fonts and licensing
+
+The site uses **Maxitype Modelo** for the hero name and navigation only, with **Plus Jakarta Sans** for all other text.
+
+Modelo is covered by Maxitype's free web-font license for sites under 100,000 monthly visitors, but the license does not permit publishing the raw font files in a public repository. Therefore:
+
+- `public/fonts/modelo/` is git-ignored and must not be committed.
+- For local development, keep the licensed `.woff2` files in that folder.
+- For GitHub Actions, add these repository **secrets**:
+  - `MODELO_FONT_LIGHT_BASE64`
+  - `MODELO_FONT_REGULAR_BASE64`
+  - `MODELO_FONT_BOLD_BASE64`
+  - `MODELO_FONT_BLACK_BASE64`
+- The workflow runs `npm run fonts:modelo` to decode those secrets into the build output before Astro builds.
+
+Do not substitute the print font, modify the font files, or commit them to a public repository.
+
+## Artwork and video
+
+The mood and background images in `src/assets/art/` and video backgrounds in `src/assets/video/` were supplied by Akram. They are used as cropped background imagery for the hero, buttons, and contact panel. Backgrounds use `cover`, so source media is never stretched.
+
+- **Light hero video:** `blue_crink.mp4`, compressed to 1080p.
+- **Dark hero video:** `slide_across.mp4`, compressed to 1080p.
+- Videos are muted, looping, inline, and removed under `prefers-reduced-motion`.
+- Static posters and art remain as fallbacks.
+
+Confirm usage rights before public commercial deployment.
+
 ## GitHub Pages
 
 The workflow in `.github/workflows/deploy.yml` builds and deploys on pushes to `main` and on manual dispatch. In the repository's **Settings → Pages**, choose **GitHub Actions** as the source.

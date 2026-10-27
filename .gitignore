@@ -11,4 +11,5 @@ workers/**/dist/
 workers/**/.wrangler/
 .opencode/
 opencode.json
+public/fonts/modelo/
 npm-debug.log*

@@ -2,15 +2,13 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionConfig } from 'motion/react';
-import { useRef } from 'react';
+import { useRef, type PointerEvent } from 'react';
 import { href, site } from '../config/site';
 import type { BlogEntry, EducationEntry, ExperienceEntry, FermiQuestion } from '../lib/types';
-import ArchArtwork from './ArchArtwork';
 import ClickCounter from './ClickCounter';
-import DiscoveryDoor from './DiscoveryDoor';
 import FermiGame from './FermiGame';
+import HeroVideo from './HeroVideo';
 import styles from './HomePage.module.css';
-import ProcessScene from './ProcessScene';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -30,22 +28,14 @@ export default function HomePage({ experiences, education, questions, posts, cli
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
       intro
-        .fromTo('[data-hero-line]', { yPercent: 110 }, { yPercent: 0, duration: 1.05, stagger: 0.1 }, 0.1)
-        .from('[data-hero-fade]', { y: 18, autoAlpha: 0, duration: 0.7, stagger: 0.08 }, 0.45)
-        .from('[data-hero-art]', { autoAlpha: 0, scale: 0.94, rotation: -2, duration: 1.25 }, 0.25);
-
-      gsap.to('[data-hero-art]', {
-        yPercent: 13,
-        rotation: 1.5,
-        ease: 'none',
-        scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 0.6 },
-      });
+        .fromTo('[data-hero-line]', { yPercent: 108 }, { yPercent: 0, duration: 0.9, stagger: 0.08 }, 0.05)
+        .from('[data-hero-fade]', { y: 16, autoAlpha: 0, duration: 0.65, stagger: 0.08 }, 0.32);
 
       gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((element) => {
         gsap.from(element, {
-          y: 38,
+          y: 28,
           autoAlpha: 0,
-          duration: 0.85,
+          duration: 0.75,
           ease: 'power3.out',
           scrollTrigger: { trigger: element, start: 'top 88%', once: true },
         });
@@ -58,42 +48,68 @@ export default function HomePage({ experiences, education, questions, posts, cli
     return () => mm.revert();
   }, { scope: root });
 
+  function moveAcrossName(event: PointerEvent<HTMLElement>) {
+    if (event.pointerType !== 'mouse' && event.buttons === 0) return;
+    const box = event.currentTarget.getBoundingClientRect();
+    const density = Math.min(1, Math.max(0, (event.clientX - box.left) / box.width));
+    event.currentTarget.style.setProperty('--name-density', density.toFixed(4));
+  }
+
   return (
     <MotionConfig reducedMotion="user">
       <div ref={root} className={styles.home}>
-        <section id="hero" className={`shell ${styles.hero}`} aria-labelledby="hero-title">
-          <div className={styles.heroCopy}>
-            <p className={styles.heroKicker} data-hero-fade>Business management · AI adoption · Process improvement</p>
-            <h1 id="hero-title" className={styles.heroTitle}>
-              <span className={styles.nameMask}><span data-hero-line>Akram</span></span>
-              <span className={`${styles.nameMask} ${styles.lastName}`}><span data-hero-line>Naser</span></span>
-            </h1>
-            <div className={styles.heroBottom} data-hero-fade>
-              <p>I solve operational problems, teach AI tools, and find useful ways for businesses to work better.</p>
-              <div className={styles.heroActions}>
-                <a className="button button--primary" href="#experience">See my experience <span aria-hidden="true">↓</span></a>
-                <a className="button" href={href('contact')}>Email me</a>
+        <section
+          id="hero"
+          className={styles.heroSection}
+          aria-labelledby="hero-title"
+          onPointerMove={moveAcrossName}
+        >
+          <HeroVideo />
+          <div className={`shell ${styles.hero}`}>
+            <div className={styles.heroInner}>
+              <h1
+                id="hero-title"
+                className={styles.heroTitle}
+                title="Move across the name to make it more or less abstract"
+              >
+                <span className={styles.nameMask}><span data-hero-line>AKRAM</span></span>
+                <span className={styles.nameMask}><span data-hero-line>NASER</span></span>
+              </h1>
+              <div className={styles.nameGauge} aria-hidden="true">
+                <span className={styles.scaleGlyphThin}>A</span>
+                <span className={styles.gauge}>
+                  <svg viewBox="0 0 160 52" role="presentation">
+                    <path className={styles.gaugeArc} d="M12 44 Q80 0 148 44" />
+                    <path className={styles.gaugeTicks} d="M20 42 Q80 8 140 42" />
+                    <g className={styles.gaugeNeedle}>
+                      <line x1="80" y1="44" x2="80" y2="12" />
+                      <circle cx="80" cy="44" r="3.5" />
+                    </g>
+                  </svg>
+                </span>
+                <span className={styles.scaleGlyphThick}>A</span>
+              </div>
+              <p className={styles.heroSubtitle} data-hero-fade>
+                Business Management · Process Improvement · AI Adoption
+              </p>
+              <div className={styles.heroActions} data-hero-fade>
+                <a className="button button--primary" href={href('contact')}>Email me</a>
+                <a className="button" href="#experience">Explore <span aria-hidden="true">↓</span></a>
               </div>
             </div>
           </div>
-          <div className={styles.heroArt} data-hero-art><ArchArtwork /></div>
-          <div className={styles.scrollNote} data-hero-fade aria-hidden="true"><span />The main story is downstairs</div>
         </section>
 
         <section className={`shell section ${styles.about}`} aria-labelledby="about-title">
           <div className={styles.aboutCopy} data-reveal>
-            <p className="section-kicker">A little context</p>
-            <h2 id="about-title" className="section-title">Curious about better ways to work.</h2>
-            <p className="section-intro">I enjoy the space between a messy real-world process and a solution that feels simple to the person using it.</p>
-            <p>My background combines economics, business management, automation, teaching, and independent coding study. I care about making things useful—and about having some fun while making them.</p>
+            <p className="section-kicker">About</p>
+            <h2 id="about-title" className="section-title">Serious about outcomes. Playful with the medium.</h2>
+            <p className="section-intro">I enjoy the space between a tangled real-world workflow and a solution that feels obvious the first time someone touches it.</p>
+            <p>My background combines economics, business management, process automation, hands-on AI coaching, and independent software study. Scroll for the work below.</p>
           </div>
-          <div className={styles.aboutArt} data-reveal>
-            <ArchArtwork compact />
-            <DiscoveryDoor eyebrow="Side discovery · 01" title="Outside work" align="left">
-              <p>Ballroom dancing, Art Nouveau, cooking and baking, strength training, and gaming.</p>
-              <p>The Art Nouveau interest made its way into the frames. That felt appropriate.</p>
-            </DiscoveryDoor>
-          </div>
+          <figure className={styles.portraitFrame} data-reveal>
+            <img src={href('me.jpg')} alt="Akram Naser" width="720" height="720" loading="lazy" />
+          </figure>
         </section>
 
         <section id="experience" className={`shell section ${styles.experience}`} aria-labelledby="experience-title">
@@ -102,88 +118,74 @@ export default function HomePage({ experiences, education, questions, posts, cli
               <p className="section-kicker">Experience</p>
               <h2 id="experience-title" className="section-title">Evidence over buzzwords.</h2>
             </div>
-            <p className="section-intro">A selection of operational improvements, teaching, and problem-solving from my work so far.</p>
+            <p className="section-intro">Operational bottlenecks fixed, colleagues trained, and hours saved—without invented case studies.</p>
           </div>
-          <div className={styles.experienceBody}>
-            <div className={styles.experienceList}>
-              {experiences.map((entry) => (
-                <article key={entry.id} className={styles.experienceEntry}>
-                  <header className={styles.experienceMeta} data-reveal>
-                    <p className={styles.timeframe}>{entry.timeframe}</p>
+          <div className={styles.experienceList}>
+            {experiences.map((entry) => (
+              <article key={entry.id} className={styles.experienceEntry}>
+                <header className={styles.experienceMeta} data-reveal>
+                  <div className={styles.experienceTop}>
                     <h3>{entry.company}</h3>
-                    <p>{entry.role}</p>
-                    <p className={styles.location}>{entry.location}</p>
-                    <p>{entry.summary}</p>
-                  </header>
-                  <div className={styles.achievements}>
-                    {entry.achievements.map((achievement, index) => (
-                      <article key={achievement.title} className={styles.achievement} data-reveal>
-                        <span className={styles.achievementNumber}>{String(index + 1).padStart(2, '0')}</span>
-                        {achievement.metric && <strong className={styles.metric}>{achievement.metric}</strong>}
-                        <h4>{achievement.title}</h4>
-                        <p>{achievement.detail}</p>
-                      </article>
-                    ))}
+                    <p className={styles.timeframeBadge}>{entry.timeframe}</p>
                   </div>
-                </article>
-              ))}
-            </div>
-            <aside className={styles.experienceDoor} data-reveal>
-              <DiscoveryDoor eyebrow="Side discovery · 02" title="Before the automation">
-                <p>The first step was not choosing a tool. It was understanding the repeated work, the handoffs, and where questions tended to get stuck.</p>
-                <p>Sometimes the useful improvement is a better process. Sometimes it is an automation. Sometimes it is simply a clear answer in the right place.</p>
-              </DiscoveryDoor>
-            </aside>
+                  <div className={styles.experienceSub}>
+                    <p className={styles.roleTitle}>{entry.role}</p>
+                    <p className={styles.locationBadge}>{entry.location}</p>
+                  </div>
+                  <p className={styles.experienceSummary}>{entry.summary}</p>
+                </header>
+                <div className={styles.achievements}>
+                  {entry.achievements.map((achievement) => (
+                    <article key={achievement.title} className={styles.achievementCard} data-reveal>
+                      {achievement.metric && <strong className={styles.metric}>{achievement.metric}</strong>}
+                      <h4>{achievement.title}</h4>
+                      <p>{achievement.detail}</p>
+                    </article>
+                  ))}
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
         <section className={`shell section ${styles.education}`} aria-labelledby="education-title">
           <div className={styles.educationHeading} data-reveal>
-            <p className="section-kicker">Education & learning</p>
-            <h2 id="education-title" className="section-title">Formal study. Informal curiosity.</h2>
+            <p className="section-kicker">Education & Learning</p>
+            <h2 id="education-title" className="section-title">Formal degrees. Daily curiosity.</h2>
           </div>
-          <div className={styles.educationBody}>
-            <div className={styles.educationList}>
-              {education.map((entry) => (
-                <article key={entry.id} className={styles.educationEntry} data-reveal>
-                  <p>{entry.timeframe}</p>
-                  <div><h3>{entry.credential}</h3><span>{entry.institution}</span></div>
-                  {entry.details.length > 0 && <ul>{entry.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>}
-                </article>
-              ))}
-            </div>
-            <DiscoveryDoor eyebrow="Side discovery · 03" title="Languages in the mix">
-              <ul>
-                <li>German · native</li>
-                <li>English · full professional proficiency</li>
-                <li>Arabic · conversational</li>
-                <li>Polish and Japanese · beginner</li>
-              </ul>
-              <p>No percentages, no radar chart. Languages are for using, not for filling in a skill map.</p>
-              </DiscoveryDoor>
+          <div className={styles.educationList}>
+            {education.map((entry) => (
+              <article key={entry.id} className={styles.educationCard} data-reveal>
+                <p className={styles.eduTime}>{entry.timeframe}</p>
+                <h3>{entry.credential}</h3>
+                <p className={styles.eduInst}>{entry.institution}</p>
+                {entry.details.length > 0 && <ul>{entry.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>}
+              </article>
+            ))}
           </div>
         </section>
-
-        <ProcessScene />
 
         <section className={`section ${styles.play}`} aria-labelledby="play-title">
           <div className="shell">
             <div className={styles.playHeading} data-reveal>
-              <div><p className="section-kicker">Play</p><h2 id="play-title" className="section-title">Useful things can still be fun.</h2></div>
-              <p className="section-intro">Two small experiences, both working right here. No screenshots pretending to be features.</p>
+              <div>
+                <p className="section-kicker">Playroom</p>
+                <h2 id="play-title" className="section-title">Useful things can still be fun.</h2>
+              </div>
+              <p className="section-intro">A daily Fermi estimation exercise and a shared click counter—both working right here.</p>
             </div>
             <div className={styles.widgetGrid} data-reveal>
               <FermiGame questions={questions} compact />
               <ClickCounter endpoint={clickEndpoint} />
             </div>
-            <a className={`text-link ${styles.playLink}`} href={href('play')}>Visit the full playroom <span aria-hidden="true">↗</span></a>
+            <a className={`button ${styles.playLink}`} href={href('play')}>Open full playroom <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
         <section className={`shell section ${styles.blog}`} aria-labelledby="blog-title">
           <div className={styles.blogHeading} data-reveal>
             <div><p className="section-kicker">Blog</p><h2 id="blog-title" className="section-title">Notes from the margin.</h2></div>
-            <a className="text-link" href={href('blog')}>All writing <span aria-hidden="true">↗</span></a>
+            <a className="button" href={href('blog')}>All writing <span aria-hidden="true">↗</span></a>
           </div>
           {posts.length > 0 ? (
             <div className={styles.postGrid}>
@@ -195,23 +197,21 @@ export default function HomePage({ experiences, education, questions, posts, cli
             </div>
           ) : (
             <div className={styles.writingDesk} data-reveal>
-              <div><span>Process</span><span>AI adoption</span><span>Building useful things</span></div>
-              <p>The first posts are being written. The publishing desk is ready when they are.</p>
-              <a className="text-link" href={href('blog')}>About the blog <span aria-hidden="true">↗</span></a>
+              <p>The MDX publishing desk is wired up and ready for the first real post—zero AI filler articles.</p>
+              <a className="button button--primary" href={href('blog')}>Visit the blog <span aria-hidden="true">↗</span></a>
             </div>
           )}
         </section>
 
         <section className={`shell ${styles.contact}`} aria-labelledby="contact-title">
           <div className={styles.contactInner} data-reveal>
-            <p className="section-kicker">One last door</p>
+            <p className={styles.contactBadge}>Contact</p>
             <h2 id="contact-title">Have a problem worth solving?</h2>
-            <p>Tell me what you are working on, what feels stuck, or what you would like to make better.</p>
+            <p>Tell me what you are working on, what feels stuck, or where better processes and AI could actually help your team.</p>
             <div className={styles.contactActions}>
               <a className="button button--primary" href={href('contact')}>Send a message <span aria-hidden="true">↗</span></a>
               {site.linkedin && <a className="button" href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>}
             </div>
-            <div className={styles.contactOrnament} aria-hidden="true"><span>✦</span></div>
           </div>
         </section>
       </div>
