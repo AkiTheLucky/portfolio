@@ -3,23 +3,23 @@ company: UBS Switzerland AG
 role: Business Management · Automation · AI Adoption
 timeframe: October 2023 — Present
 location: Zürich, Switzerland
-summary: Improving operational workflows, supporting the Credit Suisse integration, and helping colleagues adopt better tools with confidence.
+summary: I automate, teach colleagues to use new and existing tools, and help manage change.
 order: 1
 achievements:
-  - title: Routed emails with less manual work
+  - title: Email routing that runs itself
     metric: 1–2 hours
-    detail: Built a Power Automate email-routing workflow, with estimated savings of 1–2 hours per user per week.
-  - title: Automated VIP event nominations
+    detail: A Power Automate workflow sorts incoming mail automatically — an estimated 1–2 hours saved per person per week.
+  - title: I halved the manual work in a large process
     metric: 50%
-    detail: Automated parts of the nomination process with VBA, reducing manual work by half.
-  - title: Coached people on AI and automation
-    metric: 55+ / 30+
-    detail: Coached more than 55 users on AI tools and delivered over 30 one-to-one AI and automation sessions.
+    detail: VBA now handles part of the process, cutting manual effort by half.
+  - title: Taught 55 colleagues to use AI
+    metric: 55+
+    detail: One-to-one coaching on AI tools, plus over 30 hands-on automation sessions.
   - title: Trained colleagues on a CRM tool
     metric: 150+
-    detail: Trained and onboarded more than 150 colleagues as a subject-matter expert.
+    detail: "Subject-matter expert during the rollout: trainings, questions, and materials."
   - title: Mapped processes and clarified ownership
-    detail: Mapped end-to-end workflows in Visio to identify bottlenecks and built a SharePoint FAQ to support onboarding and reduce repeated queries.
-  - title: Supported the Credit Suisse integration
-    detail: Tracked front-office questions, answered migration queries, followed up on unowned items, and supported complex and institutional client migrations.
+    detail: End-to-end workflows in Visio to find bottlenecks, plus a SharePoint FAQ that stopped the same questions coming back.
+  - title: Helped two banks become one
+    detail: Tracked front-office questions through the Credit Suisse integration, chased unowned items, and supported complex and institutional client migrations.
 ---

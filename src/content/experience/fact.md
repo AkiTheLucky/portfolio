@@ -3,10 +3,10 @@ company: FACT Steuerberatungsgesellschaft mbH
 role: Working Student
 timeframe: July 2023 — September 2023
 location: Kassel, Germany
-summary: Combined language, persistence, and cross-border process knowledge to help resolve a client case.
+summary: In a German tax office where Arabic turned out to be a useful skill.
 order: 2
 achievements:
-  - title: Helped resolve a cross-border VAT case
+  - title: €20,000 recovered from a stalled VAT case
     metric: €20,000
-    detail: Used Arabic to help resolve a VAT reclamation case and recover approximately €20,000 in outstanding client refunds.
+    detail: "Arabic was the difference: it unblocked a reclamation case and brought back roughly €20,000 in client refunds."
 ---

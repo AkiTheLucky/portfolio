@@ -90,7 +90,7 @@ export default function HomePage({ experiences, education, questions, posts, cli
                 <span className={styles.scaleGlyphThick}>A</span>
               </div>
               <p className={styles.heroSubtitle} data-hero-fade>
-                Business Management · Process Improvement · AI Adoption
+                Process Improvement · AI Adoption
               </p>
               <div className={styles.heroActions} data-hero-fade>
                 <a className="button button--primary" href={href('contact')}>Email me</a>
@@ -103,9 +103,9 @@ export default function HomePage({ experiences, education, questions, posts, cli
         <section className={`shell section ${styles.about}`} aria-labelledby="about-title">
           <div className={styles.aboutCopy} data-reveal>
             <p className="section-kicker">About</p>
-            <h2 id="about-title" className="section-title">Serious about outcomes. Playful with the medium.</h2>
-            <p className="section-intro">I enjoy the space between a tangled real-world workflow and a solution that feels obvious the first time someone touches it.</p>
-            <p>My background combines economics, business management, process automation, hands-on AI coaching, and independent software study. Scroll for the work below.</p>
+            <h2 id="about-title" className="section-title">Efficiency is everywhere. You just have to look.</h2>
+            <p className="section-intro">I enjoy the in-between of processes and technology.</p>
+            <p>My background is in economics, business management, process automation, hands-on AI coaching, and back end dev learning.</p>
           </div>
           <figure className={styles.portraitFrame} data-reveal>
             <img src={href('me.jpg')} alt="Akram Naser" width="720" height="720" loading="lazy" />
@@ -116,9 +116,9 @@ export default function HomePage({ experiences, education, questions, posts, cli
           <div className={styles.sectionHeading} data-reveal>
             <div>
               <p className="section-kicker">Experience</p>
-              <h2 id="experience-title" className="section-title">Evidence over buzzwords.</h2>
+              <h2 id="experience-title" className="section-title">Here's what I found.</h2>
             </div>
-            <p className="section-intro">Operational bottlenecks fixed, colleagues trained, and hours saved—without invented case studies.</p>
+            <p className="section-intro">The best solutions sometimes are the most straightforward.</p>
           </div>
           <div className={styles.experienceList}>
             {experiences.map((entry) => (
@@ -151,7 +151,7 @@ export default function HomePage({ experiences, education, questions, posts, cli
         <section className={`shell section ${styles.education}`} aria-labelledby="education-title">
           <div className={styles.educationHeading} data-reveal>
             <p className="section-kicker">Education & Learning</p>
-            <h2 id="education-title" className="section-title">Formal degrees. Daily curiosity.</h2>
+            <h2 id="education-title" className="section-title">Degrees and learnings.</h2>
           </div>
           <div className={styles.educationList}>
             {education.map((entry) => (
@@ -170,9 +170,9 @@ export default function HomePage({ experiences, education, questions, posts, cli
             <div className={styles.playHeading} data-reveal>
               <div>
                 <p className="section-kicker">Playroom</p>
-                <h2 id="play-title" className="section-title">Useful things can still be fun.</h2>
+                <h2 id="play-title" className="section-title">A fun fact.</h2>
               </div>
-              <p className="section-intro">A daily Fermi estimation exercise and a shared click counter—both working right here.</p>
+              <p className="section-intro">Did you know that I get my best ideas while fidgeting?</p>
             </div>
             <div className={styles.widgetGrid} data-reveal>
               <FermiGame questions={questions} compact />
@@ -184,7 +184,7 @@ export default function HomePage({ experiences, education, questions, posts, cli
 
         <section className={`shell section ${styles.blog}`} aria-labelledby="blog-title">
           <div className={styles.blogHeading} data-reveal>
-            <div><p className="section-kicker">Blog</p><h2 id="blog-title" className="section-title">Notes from the margin.</h2></div>
+            <div><p className="section-kicker">Blog</p><h2 id="blog-title" className="section-title">Thoughts and ideas.</h2></div>
             <a className="button" href={href('blog')}>All writing <span aria-hidden="true">↗</span></a>
           </div>
           {posts.length > 0 ? (
