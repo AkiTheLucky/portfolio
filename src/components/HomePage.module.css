@@ -103,6 +103,15 @@
   width: 145px;
   flex: 0 1 145px;
   color: var(--ink-soft);
+  cursor: grab;
+}
+
+.gauge:active {
+  cursor: grabbing;
+}
+
+.gauge:hover .gaugeArc {
+  opacity: 0.75;
 }
 
 .gaugeInput {
@@ -113,7 +122,7 @@
   margin: 0;
   padding: 0;
   opacity: 0;
-  cursor: ew-resize;
+  cursor: inherit;
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
@@ -157,8 +166,8 @@
 .gaugeNeedle {
   color: var(--accent-text);
   transform-box: view-box;
-  transform-origin: 80px 44px;
-  transform: rotate(calc(-60deg + var(--name-density) * 120deg));
+  transform-origin: 80px 52px;
+  transform: rotate(calc(-90deg + var(--name-density) * 180deg));
   transition: transform 100ms linear;
 }
 
@@ -184,24 +193,35 @@
   display: block;
 }
 
-.nameLetter {
-  display: inline-block;
+.rainbow {
+  width: max-content;
+  max-width: 100%;
+  font-weight: 900;
+  -webkit-text-stroke-width: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    hsl(0 95% 60%) 0%,
+    hsl(60 95% 60%) 8.333%,
+    hsl(120 95% 60%) 16.667%,
+    hsl(180 95% 60%) 25%,
+    hsl(240 95% 60%) 33.333%,
+    hsl(300 95% 60%) 41.667%,
+    hsl(0 95% 60%) 50%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: starWave 3200ms linear infinite;
 }
 
-.rainbow .nameLetter {
-  color: hsl(calc(var(--letter) * 36deg) 95% 55%);
-  -webkit-text-stroke-color: currentColor;
-  animation: starHue 800ms linear infinite;
-  animation-delay: calc(var(--letter) * -70ms);
-}
-
-@keyframes starHue {
-  from { filter: hue-rotate(-1deg); }
-  to { filter: hue-rotate(359deg); }
+@keyframes starWave {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rainbow .nameLetter {
+  .rainbow {
     animation: none;
   }
 }

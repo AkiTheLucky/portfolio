@@ -66,31 +66,21 @@ export default function HomePage({ experiences, education, questions, posts, cli
                 className={`${styles.heroTitle} ${nameWeight >= 1 ? styles.rainbow : ''}`}
                 title="Drag the gauge to make the name lighter or heavier"
               >
-                {['AKRAM', 'NASER'].map((word, wordIndex) => (
+                {['AKRAM', 'NASER'].map((word) => (
                   <span key={word} className={styles.nameMask}>
-                    <span data-hero-line>
-                      {Array.from(word).map((letter, letterIndex) => (
-                        <span
-                          key={`${word}-${letterIndex}`}
-                          className={styles.nameLetter}
-                          style={{ '--letter': wordIndex * 5 + letterIndex } as CSSProperties}
-                        >
-                          {letter}
-                        </span>
-                      ))}
-                    </span>
+                    <span data-hero-line>{word}</span>
                   </span>
                 ))}
               </h1>
               <div className={styles.nameGauge}>
                 <span className={styles.scaleGlyphThin} aria-hidden="true">A</span>
                 <span className={styles.gauge}>
-                  <svg viewBox="0 0 160 52" role="presentation" aria-hidden="true" focusable="false">
-                    <path className={styles.gaugeArc} d="M12 44 Q80 0 148 44" />
-                    <path className={styles.gaugeTicks} d="M20 42 Q80 8 140 42" />
+                  <svg viewBox="0 0 160 56" role="presentation" aria-hidden="true" focusable="false">
+                    <path className={styles.gaugeArc} d="M36 52 A44 44 0 0 1 124 52" />
+                    <path className={styles.gaugeTicks} d="M43 52 A37 37 0 0 1 117 52" />
                     <g className={styles.gaugeNeedle}>
-                      <line x1="80" y1="44" x2="80" y2="12" />
-                      <circle cx="80" cy="44" r="3.5" />
+                      <line x1="80" y1="52" x2="80" y2="22" />
+                      <circle cx="80" cy="52" r="3.5" />
                     </g>
                   </svg>
                   <input
