@@ -3,7 +3,7 @@
 }
 
 .heroSection {
-  --name-density: 0.08;
+  --name-density: 0.2;
   position: relative;
   display: flex;
   min-height: 94svh;
@@ -53,7 +53,6 @@
   align-items: center;
   padding-top: 7rem;
   padding-bottom: 4rem;
-  cursor: ew-resize;
 }
 
 .heroInner {
@@ -67,13 +66,13 @@
   color: var(--ink);
   font-family: var(--modelo);
   font-size: clamp(4.2rem, 11vw, 9.2rem);
-  font-weight: calc(300 + var(--name-density) * 100);
+  font-weight: 400;
   font-style: normal;
   line-height: 0.92;
-  letter-spacing: calc(0.055em - var(--name-density) * 0.035em);
+  letter-spacing: calc(0.06em - var(--name-density) * 0.055em);
   text-transform: uppercase;
-  -webkit-text-stroke: calc(0.05px + var(--name-density) * 2.4px) currentColor;
-  transition: font-weight 120ms linear, letter-spacing 120ms linear, -webkit-text-stroke-width 120ms linear;
+  -webkit-text-stroke: calc(var(--name-density) * 0.045em) currentColor;
+  transition: letter-spacing 90ms linear, -webkit-text-stroke-width 90ms linear;
 }
 
 .nameGauge {
@@ -104,6 +103,31 @@
   width: 145px;
   flex: 0 1 145px;
   color: var(--ink-soft);
+}
+
+.gaugeInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.gauge:focus-within {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.gauge:focus-within .gaugeArc {
+  opacity: 0.9;
+  stroke-width: 1.6;
 }
 
 .gauge svg {
@@ -158,6 +182,28 @@
 
 .nameMask > span {
   display: block;
+}
+
+.nameLetter {
+  display: inline-block;
+}
+
+.rainbow .nameLetter {
+  color: hsl(calc(var(--letter) * 36deg) 95% 55%);
+  -webkit-text-stroke-color: currentColor;
+  animation: starHue 800ms linear infinite;
+  animation-delay: calc(var(--letter) * -70ms);
+}
+
+@keyframes starHue {
+  from { filter: hue-rotate(-1deg); }
+  to { filter: hue-rotate(359deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rainbow .nameLetter {
+    animation: none;
+  }
 }
 
 .heroSubtitle {

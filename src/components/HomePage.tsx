@@ -2,7 +2,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionConfig } from 'motion/react';
-import { useRef, type PointerEvent } from 'react';
+import { useRef, useState, type CSSProperties } from 'react';
 import { href, site } from '../config/site';
 import type { BlogEntry, EducationEntry, ExperienceEntry, FermiQuestion } from '../lib/types';
 import ClickCounter from './ClickCounter';
@@ -22,6 +22,7 @@ interface HomePageProps {
 
 export default function HomePage({ experiences, education, questions, posts, clickEndpoint }: HomePageProps) {
   const root = useRef<HTMLDivElement>(null);
+  const [nameWeight, setNameWeight] = useState(0.2);
 
   useGSAP(() => {
     const mm = gsap.matchMedia();
@@ -48,13 +49,6 @@ export default function HomePage({ experiences, education, questions, posts, cli
     return () => mm.revert();
   }, { scope: root });
 
-  function moveAcrossName(event: PointerEvent<HTMLElement>) {
-    if (event.pointerType !== 'mouse' && event.buttons === 0) return;
-    const box = event.currentTarget.getBoundingClientRect();
-    const density = Math.min(1, Math.max(0, (event.clientX - box.left) / box.width));
-    event.currentTarget.style.setProperty('--name-density', density.toFixed(4));
-  }
-
   return (
     <MotionConfig reducedMotion="user">
       <div ref={root} className={styles.home}>
@@ -62,23 +56,36 @@ export default function HomePage({ experiences, education, questions, posts, cli
           id="hero"
           className={styles.heroSection}
           aria-labelledby="hero-title"
-          onPointerMove={moveAcrossName}
+          style={{ '--name-density': nameWeight } as CSSProperties}
         >
           <HeroVideo />
           <div className={`shell ${styles.hero}`}>
             <div className={styles.heroInner}>
               <h1
                 id="hero-title"
-                className={styles.heroTitle}
-                title="Move across the name to make it more or less abstract"
+                className={`${styles.heroTitle} ${nameWeight >= 1 ? styles.rainbow : ''}`}
+                title="Drag the gauge to make the name lighter or heavier"
               >
-                <span className={styles.nameMask}><span data-hero-line>AKRAM</span></span>
-                <span className={styles.nameMask}><span data-hero-line>NASER</span></span>
+                {['AKRAM', 'NASER'].map((word, wordIndex) => (
+                  <span key={word} className={styles.nameMask}>
+                    <span data-hero-line>
+                      {Array.from(word).map((letter, letterIndex) => (
+                        <span
+                          key={`${word}-${letterIndex}`}
+                          className={styles.nameLetter}
+                          style={{ '--letter': wordIndex * 5 + letterIndex } as CSSProperties}
+                        >
+                          {letter}
+                        </span>
+                      ))}
+                    </span>
+                  </span>
+                ))}
               </h1>
-              <div className={styles.nameGauge} aria-hidden="true">
-                <span className={styles.scaleGlyphThin}>A</span>
+              <div className={styles.nameGauge}>
+                <span className={styles.scaleGlyphThin} aria-hidden="true">A</span>
                 <span className={styles.gauge}>
-                  <svg viewBox="0 0 160 52" role="presentation">
+                  <svg viewBox="0 0 160 52" role="presentation" aria-hidden="true" focusable="false">
                     <path className={styles.gaugeArc} d="M12 44 Q80 0 148 44" />
                     <path className={styles.gaugeTicks} d="M20 42 Q80 8 140 42" />
                     <g className={styles.gaugeNeedle}>
@@ -86,21 +93,31 @@ export default function HomePage({ experiences, education, questions, posts, cli
                       <circle cx="80" cy="44" r="3.5" />
                     </g>
                   </svg>
+                  <input
+                    className={styles.gaugeInput}
+                    type="range"
+                    min={0}
+                    max={100}
+                    step={1}
+                    value={Math.round(nameWeight * 100)}
+                    onChange={(event) => setNameWeight(Number(event.target.value) / 100)}
+                    aria-label="Name weight"
+                  />
                 </span>
-                <span className={styles.scaleGlyphThick}>A</span>
+                <span className={styles.scaleGlyphThick} aria-hidden="true">A</span>
               </div>
               <p className={styles.heroSubtitle} data-hero-fade>
                 Process Improvement · AI Adoption
               </p>
               <div className={styles.heroActions} data-hero-fade>
                 <a className="button button--primary" href={href('contact')}>Email me</a>
-                <a className="button" href="#experience">Explore <span aria-hidden="true">↓</span></a>
+                <a className="button" href="#about">Explore <span aria-hidden="true">↓</span></a>
               </div>
             </div>
           </div>
         </section>
 
-        <section className={`shell section ${styles.about}`} aria-labelledby="about-title">
+        <section id="about" className={`shell section ${styles.about}`} aria-labelledby="about-title">
           <div className={styles.aboutCopy} data-reveal>
             <p className="section-kicker">About</p>
             <h2 id="about-title" className="section-title">Efficiency is everywhere. You just have to look.</h2>
@@ -116,9 +133,9 @@ export default function HomePage({ experiences, education, questions, posts, cli
           <div className={styles.sectionHeading} data-reveal>
             <div>
               <p className="section-kicker">Experience</p>
-              <h2 id="experience-title" className="section-title">Here's what I found.</h2>
+              <h2 id="experience-title" className="section-title">The best solutions are sometimes the most straightforward.</h2>
             </div>
-            <p className="section-intro">The best solutions sometimes are the most straightforward.</p>
+            <p className="section-intro">Here's what I found.</p>
           </div>
           <div className={styles.experienceList}>
             {experiences.map((entry) => (

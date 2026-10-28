@@ -34,7 +34,7 @@ Always follow these non-negotiable rules when working on Akram Naser's portfolio
   2. Akram's title/role line in clean font (no location/city badge, no extra pills).
   3. The two call-to-action buttons (`Email me` and `Explore`).
 - **Never** clutter the Hero with decorative circles, floating metric cards (`-50%`, `150+`, `1-2h`), or location badges.
-- The name is a readability instrument: it must remain readable at rest. Horizontal pointer movement across the hero may gradually thicken/abstract it, capped tightly at **font-weight 400** plus a small text stroke. The ornamental `A—arc gauge—A` indicator should expose the range without looking like a generic range slider.
+- The name is a readability instrument: it must remain readable at rest. Thickness is changed **deliberately, never by incidental pointer movement** — the `A—arc gauge—A` under the name is the only control. Drag it, click it, or arrow-key it to move from a hairline stencil to a heavy filled stroke. It must be keyboard accessible, expose its value to assistive tech, and never look like a generic range slider.
 
 ## 4. Content Rules
 - No numbered labels in section headers or decorative index numbers inside cards/headings.
