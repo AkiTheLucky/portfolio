@@ -66,9 +66,19 @@ export default function HomePage({ experiences, education, questions, posts, cli
                 className={`${styles.heroTitle} ${nameWeight >= 1 ? styles.rainbow : ''}`}
                 title="Drag the gauge to make the name lighter or heavier"
               >
-                {['AKRAM', 'NASER'].map((word) => (
+                {['AKRAM', 'NASER'].map((word, wordIndex) => (
                   <span key={word} className={styles.nameMask}>
-                    <span data-hero-line>{word}</span>
+                    <span data-hero-line>
+                      {Array.from(word).map((letter, letterIndex) => (
+                        <span
+                          key={`${word}-${letterIndex}`}
+                          className={styles.nameLetter}
+                          style={{ '--letter': wordIndex * 5 + letterIndex } as CSSProperties}
+                        >
+                          {letter}
+                        </span>
+                      ))}
+                    </span>
                   </span>
                 ))}
               </h1>
@@ -119,7 +129,7 @@ export default function HomePage({ experiences, education, questions, posts, cli
           </figure>
         </section>
 
-        <section id="experience" className={`shell section ${styles.experience}`} aria-labelledby="experience-title">
+        <section id="experience" className="shell section" aria-labelledby="experience-title">
           <div className={styles.sectionHeading} data-reveal>
             <div>
               <p className="section-kicker">Experience</p>
@@ -155,7 +165,7 @@ export default function HomePage({ experiences, education, questions, posts, cli
           </div>
         </section>
 
-        <section className={`shell section ${styles.education}`} aria-labelledby="education-title">
+        <section className="shell section" aria-labelledby="education-title">
           <div className={styles.educationHeading} data-reveal>
             <p className="section-kicker">Education & Learning</p>
             <h2 id="education-title" className="section-title">Degrees and learnings.</h2>
@@ -188,7 +198,7 @@ export default function HomePage({ experiences, education, questions, posts, cli
           </div>
         </section>
 
-        <section className={`shell section ${styles.blog}`} aria-labelledby="blog-title">
+        <section className="shell section" aria-labelledby="blog-title">
           <div className={styles.blogHeading} data-reveal>
             <div><p className="section-kicker">Blog</p><h2 id="blog-title" className="section-title">Thoughts and ideas.</h2></div>
             <a className="button" href={href('blog')}>All writing <span aria-hidden="true">↗</span></a>
