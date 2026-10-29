@@ -29,8 +29,9 @@ export default function HomePage({ experiences, education, questions, posts, cli
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
       intro
-        .fromTo('[data-hero-line]', { yPercent: 108 }, { yPercent: 0, duration: 0.9, stagger: 0.08 }, 0.05)
-        .from('[data-hero-fade]', { y: 16, autoAlpha: 0, duration: 0.65, stagger: 0.08 }, 0.32);
+        .fromTo('[data-hero-heading]', { yPercent: 14, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.9 }, 0.05)
+        .from('[data-hero-fade]', { y: 16, autoAlpha: 0, duration: 0.65, stagger: 0.08 }, 0.32)
+        .set('[data-hero-heading]', { clearProps: 'transform,opacity,visibility,willChange' }, '>');
 
       gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((element) => {
         gsap.from(element, {
@@ -65,22 +66,9 @@ export default function HomePage({ experiences, education, questions, posts, cli
                 id="hero-title"
                 className={`${styles.heroTitle} ${nameWeight >= 1 ? styles.rainbow : ''}`}
                 title="Drag the gauge to make the name lighter or heavier"
+                data-hero-heading
               >
-                {['AKRAM', 'NASER'].map((word, wordIndex) => (
-                  <span key={word} className={styles.nameMask}>
-                    <span data-hero-line>
-                      {Array.from(word).map((letter, letterIndex) => (
-                        <span
-                          key={`${word}-${letterIndex}`}
-                          className={styles.nameLetter}
-                          style={{ '--letter': wordIndex * 5 + letterIndex } as CSSProperties}
-                        >
-                          {letter}
-                        </span>
-                      ))}
-                    </span>
-                  </span>
-                ))}
+                AKRAM<br />NASER
               </h1>
               <div className={styles.nameGauge}>
                 <span className={styles.scaleGlyphThin} aria-hidden="true">A</span>
