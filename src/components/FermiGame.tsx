@@ -52,7 +52,7 @@ export default function FermiGame({ questions, compact = false }: { questions: F
         <header className={styles.header}>
           <div>
             <p className={styles.kicker}>Daily Fermi · {dateLabel}</p>
-            <h3>Estimate first. Calculate second.</h3>
+            <h3>I love brain teasers.</h3>
           </div>
           <div className={styles.streak} aria-label={`${streak} day streak`}><strong>{streak}</strong><span>day streak</span></div>
         </header>

@@ -177,9 +177,8 @@ export default function HomePage({ experiences, education, questions, posts, cli
             <div className={styles.playHeading} data-reveal>
               <div>
                 <p className="section-kicker">Playroom</p>
-                <h2 id="play-title" className="section-title">A fun fact.</h2>
+                <h2 id="play-title" className="section-title">Did you know I get my best ideas while fidgeting?</h2>
               </div>
-              <p className="section-intro">Did you know that I get my best ideas while fidgeting?</p>
             </div>
             <div className={styles.widgetGrid} data-reveal>
               <FermiGame questions={questions} compact />
