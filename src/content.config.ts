@@ -36,7 +36,7 @@ const education = defineCollection({
     credential: z.string(),
     credentialLink: z.object({
       text: z.string(),
-      href: z.string().url(),
+      href: z.url(),
     }).optional(),
     timeframe: z.string(),
     order: z.number(),

@@ -1,6 +1,21 @@
 export const COUNTER_STORAGE_KEY = 'akram-click-count';
 export const MAX_CLICK_BATCH = 20;
 
+export interface ClickTier {
+  threshold: number;
+  amount: number;
+}
+
+export const CLICK_TIERS: ClickTier[] = [
+  { threshold: 0, amount: 1 },
+  { threshold: 4, amount: 2 },
+  { threshold: 20, amount: 5 },
+];
+
+export function unlockedTiers(personal: number): ClickTier[] {
+  return CLICK_TIERS.filter((tier) => personal >= tier.threshold);
+}
+
 export function readPersonalCount(value: string | null): number {
   if (!value) return 0;
   const count = Number(value);

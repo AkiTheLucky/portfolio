@@ -1,6 +1,6 @@
 import { MotionConfig, motion } from 'motion/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { COUNTER_STORAGE_KEY, readPersonalCount, takeClickBatch } from '../lib/counter';
+import { COUNTER_STORAGE_KEY, readPersonalCount, takeClickBatch, unlockedTiers } from '../lib/counter';
 import styles from './ClickCounter.module.css';
 
 const number = new Intl.NumberFormat('en');
@@ -60,15 +60,17 @@ export default function ClickCounter({ endpoint = '' }: { endpoint?: string }) {
     return () => window.clearInterval(interval);
   }, [endpoint, flush]);
 
-  function click() {
-    const next = personal + 1;
+  function click(amount: number) {
+    const next = personal + amount;
     setPersonal(next);
     try { localStorage.setItem(COUNTER_STORAGE_KEY, String(next)); } catch { /* Local storage is optional. */ }
     if (endpoint) {
-      pending.current += 1;
-      setGlobal((value) => value === null ? value : value + 1);
+      pending.current += amount;
+      setGlobal((value) => value === null ? value : value + amount);
     }
   }
+
+  const unlocked = unlockedTiers(personal);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -78,9 +80,24 @@ export default function ClickCounter({ endpoint = '' }: { endpoint?: string }) {
           <h3>Click here.</h3>
         </div>
         <div className={styles.interaction}>
-          <motion.button type="button" className={styles.button} onClick={click} whileTap={{ scale: 0.93 }} whileHover={{ scale: 1.025 }} transition={{ type: 'spring', stiffness: 420, damping: 22 }}>
-            <span>Click</span><span aria-hidden="true">↗</span>
-          </motion.button>
+          <div className={styles.buttons}>
+            {unlocked.map((tier) => (
+              <motion.button
+                key={tier.amount}
+                type="button"
+                className={styles.button}
+                onClick={() => click(tier.amount)}
+                aria-label={`Add ${tier.amount} ${tier.amount === 1 ? 'click' : 'clicks'}`}
+                initial={tier.amount === 1 ? false : { opacity: 0, scale: 0.65 }}
+                animate={{ opacity: 1, scale: 1 }}
+                whileTap={{ scale: 0.93 }}
+                whileHover={{ scale: 1.025 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 22 }}
+              >
+                <span>{tier.amount === 1 ? 'Click' : `Click ×${tier.amount}`}</span><span aria-hidden="true">↗</span>
+              </motion.button>
+            ))}
+          </div>
           <div className={styles.counts}>
             <div><strong>{global === null ? '—' : number.format(global)}</strong><span>global clicks</span></div>
             <div><motion.strong key={personal} initial={{ y: 5, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>{number.format(personal)}</motion.strong><span>your clicks</span></div>
