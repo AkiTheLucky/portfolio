@@ -12,6 +12,20 @@ import styles from './HomePage.module.css';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+function CredentialText({ entry }: { entry: EducationEntry }) {
+  const link = entry.credentialLink;
+  const start = link ? entry.credential.indexOf(link.text) : -1;
+  if (!link || start === -1) return <>{entry.credential}</>;
+  const end = start + link.text.length;
+  return (
+    <>
+      {entry.credential.slice(0, start)}
+      <a className={styles.credentialLink} href={link.href} target="_blank" rel="noreferrer noopener">{link.text}</a>
+      {entry.credential.slice(end)}
+    </>
+  );
+}
+
 interface HomePageProps {
   experiences: ExperienceEntry[];
   education: EducationEntry[];
@@ -162,7 +176,7 @@ export default function HomePage({ experiences, education, questions, posts, cli
             {education.map((entry) => (
               <article key={entry.id} className={styles.educationCard} data-reveal>
                 <p className={styles.eduTime}>{entry.timeframe}</p>
-                <h3>{entry.credential}</h3>
+                <h3>{entry.credentialLink ? <CredentialText entry={entry} /> : entry.credential}</h3>
                 <p className={styles.eduInst}>{entry.institution}</p>
                 {entry.details.length > 0 && <ul>{entry.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>}
               </article>

@@ -14,10 +14,16 @@ export interface ExperienceEntry {
   achievements: Achievement[];
 }
 
+export interface CredentialLink {
+  text: string;
+  href: string;
+}
+
 export interface EducationEntry {
   id: string;
   institution: string;
   credential: string;
+  credentialLink?: CredentialLink;
   timeframe: string;
   details: string[];
 }

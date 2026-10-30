@@ -414,6 +414,17 @@
   font-weight: 550;
 }
 
+.credentialLink {
+  color: var(--accent-text);
+  text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
+  transition: text-decoration-color 160ms ease;
+}
+
+.credentialLink:hover,
+.credentialLink:focus-visible {
+  text-decoration-color: currentColor;
+}
+
 .educationCard ul {
   margin: 0;
   padding-left: 1.1rem;

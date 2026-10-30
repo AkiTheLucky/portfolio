@@ -25,6 +25,17 @@
   text-transform: uppercase;
 }
 
+.kickerLink {
+  color: inherit;
+  text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
+  transition: text-decoration-color 160ms ease;
+}
+
+.kickerLink:hover,
+.kickerLink:focus-visible {
+  text-decoration-color: currentColor;
+}
+
 .header h3 {
   margin: 0;
   font-size: clamp(1.4rem, 2.4vw, 1.85rem);

@@ -1,6 +1,9 @@
 ---
 institution: Independent coding study
 credential: 230 days of practice on Boot.dev as of October 2026
+credentialLink:
+  text: Boot.dev
+  href: https://www.boot.dev/u/akilucky
 timeframe: Ongoing
 order: 4
 details:

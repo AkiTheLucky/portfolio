@@ -74,9 +74,9 @@ export default function ClickCounter({ endpoint = '' }: { endpoint?: string }) {
     <MotionConfig reducedMotion="user">
       <article className={styles.counter}>
         <div className={styles.copy}>
-          <p className={styles.kicker}>A very serious metric</p>
+          <p className={styles.kicker}>Make number go up</p>
           <h3>Click. Add one. Improve nothing.</h3>
-          <p>Your count stays in this browser. The global count is shared with everyone else who has found this button.</p>
+          <p>Click here.</p>
         </div>
         <div className={styles.interaction}>
           <motion.button type="button" className={styles.button} onClick={click} whileTap={{ scale: 0.93 }} whileHover={{ scale: 1.025 }} transition={{ type: 'spring', stiffness: 420, damping: 22 }}>

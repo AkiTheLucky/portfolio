@@ -51,7 +51,10 @@ export default function FermiGame({ questions, compact = false }: { questions: F
       <article className={`${styles.game} ${compact ? styles.compact : ''}`}>
         <header className={styles.header}>
           <div>
-            <p className={styles.kicker}>Daily Fermi · {dateLabel}</p>
+            <p className={styles.kicker}>
+              <a className={styles.kickerLink} href="https://fermi.gg/" target="_blank" rel="noreferrer noopener">Daily Fermi</a>
+              {' '}style question · {dateLabel}
+            </p>
             <h3>I love brain teasers.</h3>
           </div>
           <div className={styles.streak} aria-label={`${streak} day streak`}><strong>{streak}</strong><span>day streak</span></div>

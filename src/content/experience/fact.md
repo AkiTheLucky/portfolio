@@ -7,6 +7,5 @@ summary: In a German tax office where Arabic turned out to be a useful skill.
 order: 2
 achievements:
   - title: €20,000 recovered from a stalled VAT case
-    metric: €20,000
     detail: "Arabic was the difference: it unblocked a reclamation case and brought back roughly €20,000 in client refunds."
 ---
