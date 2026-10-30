@@ -2,11 +2,12 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { href } from '../../config/site';
+import { postSlug } from '../../lib/blog';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
-<BaseLayout title="Blog — Akram Naser" description="Notes on processes, AI adoption, and building useful things.">
+<BaseLayout title="Blog — Akram Naser" description="Writing about process improvement, AI adoption, and building useful things.">
   <header class="page-hero shell">
     <p class="section-kicker">Blog</p>
     <h1>Thoughts and ideas.</h1>
@@ -16,7 +17,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     {posts.length > 0 ? (
       <div class="blog-list">
         {posts.map((post) => (
-          <a class="blog-item" href={href(`blog/${post.id}`)}>
+          <a class="blog-item" href={href(`blog/${postSlug(post.id)}`)}>
             <time datetime={post.data.pubDate.toISOString()}>{new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(post.data.pubDate)}</time>
             <div><h2>{post.data.title}</h2><p>{post.data.description}</p></div>
           </a>

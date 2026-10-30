@@ -1,5 +1,5 @@
 ---
-question: How many A4 sheets would cover a 105 × 68 metre football pitch if you laid them flat without overlap?
+question: How many A4 sheets would cover a football pitch measuring 105 × 68 metres if you laid them flat without overlap?
 answer: 114500
 unit: sheets
 assumptions:

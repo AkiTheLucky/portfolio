@@ -2,10 +2,17 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { href } from '../../config/site';
+import { postSlug } from '../../lib/blog';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+  const seen = new Set<string>();
+  return posts.map((post) => {
+    const id = postSlug(post.id);
+    if (seen.has(id)) throw new Error(`Two blog posts resolve to the slug "${id}". Rename one.`);
+    seen.add(id);
+    return { params: { id }, props: { post } };
+  });
 }
 
 const { post } = Astro.props;
@@ -15,7 +22,7 @@ const { Content } = await render(post);
   <article class="page-content shell prose">
     <p class="prose-meta"><a href={href('blog')}>Blog</a> · <time datetime={post.data.pubDate.toISOString()}>{new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(post.data.pubDate)}</time></p>
     <h1>{post.data.title}</h1>
-    <p>{post.data.description}</p>
+    <p class="prose-lead">{post.data.description}</p>
     <Content />
   </article>
 </BaseLayout>

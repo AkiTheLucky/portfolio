@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import HomePage from '../components/HomePage';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { postSlug } from '../lib/blog';
 
 const experience = (await getCollection('experience'))
   .sort((a, b) => a.data.order - b.data.order)
@@ -17,7 +18,7 @@ const questions = (await getCollection('fermi')).map((entry) => ({
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
   .map((entry) => ({
-    id: entry.id,
+    id: postSlug(entry.id),
     title: entry.data.title,
     description: entry.data.description,
     pubDate: new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(entry.data.pubDate),

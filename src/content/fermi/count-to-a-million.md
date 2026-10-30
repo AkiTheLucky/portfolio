@@ -1,5 +1,5 @@
 ---
-question: Counting one number per second without stopping, how many days would it take to reach one million?
+question: If you counted one number per second without stopping, how many days would it take to reach one million?
 answer: 12
 unit: days
 assumptions:

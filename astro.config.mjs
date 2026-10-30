@@ -9,4 +9,7 @@ export default defineConfig({
   output: 'static',
   devToolbar: { enabled: false },
   integrations: [react(), mdx(), sitemap()],
+  markdown: {
+    shikiConfig: { theme: 'github-dark', wrap: true },
+  },
 });

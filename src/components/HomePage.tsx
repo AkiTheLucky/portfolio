@@ -124,7 +124,7 @@ export default function HomePage({ experiences, education, questions, posts, cli
             <p className="section-kicker">About</p>
             <h2 id="about-title" className="section-title">Efficiency is everywhere. You just have to look.</h2>
             <p className="section-intro">I enjoy the in-between of processes and technology.</p>
-            <p>My background is in economics, business management, process automation, hands-on AI coaching, and back end dev learning.</p>
+            <p>My background is in economics, business management, process automation, hands-on AI coaching, and back-end development.</p>
           </div>
           <figure className={styles.portraitFrame} data-reveal>
             <img src={href('me.jpg')} alt="Akram Naser" width="720" height="720" loading="lazy" />
@@ -215,7 +215,7 @@ export default function HomePage({ experiences, education, questions, posts, cli
             </div>
           ) : (
             <div className={styles.writingDesk} data-reveal>
-              <p>The MDX publishing desk is wired up and ready for the first real post—zero AI filler articles.</p>
+              <p>The MDX publishing desk is wired up and ready for the first real post — zero AI filler articles.</p>
               <a className="button button--primary" href={href('blog')}>Visit the blog <span aria-hidden="true">↗</span></a>
             </div>
           )}

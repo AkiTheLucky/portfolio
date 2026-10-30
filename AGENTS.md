@@ -47,3 +47,10 @@ Always follow these non-negotiable rules when working on Akram Naser's portfolio
 - Avoid bubbly `999px` pill overload and overly rounded cartoon cards. Use crisp, architectural corners (`6px`–`10px`).
 - Use `public/me.jpg` for Akram's portrait in the About section.
 - Never expose Akram's private email address or phone number in the repository or frontend source.
+
+## 6. Blog posts
+- Filenames are dated: `YYYY-MM-DD-slug.mdx`. The date is stripped from the URL, so `2026-11-04-why-process-beats-tooling.mdx` publishes at `/blog/why-process-beats-tooling`.
+- Keep the filename date and `pubDate` in step; the blog sorts by `pubDate`, not by filename.
+- `draft: true` is what keeps a post out of the build. A leading underscore does **not** hide a file.
+- `src/content/blog/_2026-10-30-post-title.mdx` is the copy-me template.
+- Prose supports headings, lists, links, quotes, inline code, fenced code (dark GitHub theme), tables, rules, and figures.

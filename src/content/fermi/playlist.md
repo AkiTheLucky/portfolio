@@ -1,5 +1,5 @@
 ---
-question: A playlist contains 10,000 songs. How many hours would it play?
+question: A playlist contains 10,000 songs. How many hours would it play for?
 answer: 583
 unit: hours
 assumptions:
