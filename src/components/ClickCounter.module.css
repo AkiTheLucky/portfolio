@@ -28,12 +28,6 @@
   font-size: clamp(1.5rem, 2.6vw, 2.1rem);
 }
 
-.copy > p:last-child {
-  max-width: 40ch;
-  color: rgba(246, 244, 238, 0.86);
-  font-size: 0.88rem;
-}
-
 .interaction {
   display: grid;
   grid-template-columns: auto 1fr;

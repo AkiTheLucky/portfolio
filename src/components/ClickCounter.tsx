@@ -75,8 +75,7 @@ export default function ClickCounter({ endpoint = '' }: { endpoint?: string }) {
       <article className={styles.counter}>
         <div className={styles.copy}>
           <p className={styles.kicker}>Make number go up</p>
-          <h3>Click. Add one. Improve nothing.</h3>
-          <p>Click here.</p>
+          <h3>Click here.</h3>
         </div>
         <div className={styles.interaction}>
           <motion.button type="button" className={styles.button} onClick={click} whileTap={{ scale: 0.93 }} whileHover={{ scale: 1.025 }} transition={{ type: 'spring', stiffness: 420, damping: 22 }}>

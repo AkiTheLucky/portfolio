@@ -1,5 +1,5 @@
 ---
-question: A playlist contains 10,000 songs. At an average of 3.5 minutes per song, how many hours would it play?
+question: A playlist contains 10,000 songs. How many hours would it play?
 answer: 583
 unit: hours
 assumptions:

@@ -1,5 +1,5 @@
 ---
-question: How many hours of video fit on a 1 TB drive at about 1 GB per hour?
+question: How many hours of video fit on a 1 TB drive?
 answer: 1000
 unit: hours
 assumptions:

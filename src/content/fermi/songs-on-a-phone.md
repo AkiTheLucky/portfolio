@@ -1,5 +1,5 @@
 ---
-question: How many songs fit on a 128 GB phone at about 4 MB per song?
+question: How many songs fit on a 128 GB phone?
 answer: 32000
 unit: songs
 assumptions:

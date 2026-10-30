@@ -1,5 +1,5 @@
 ---
-question: How many 2 mm coins would you need to stack to reach the height of a 10-storey building?
+question: How many coins would you need to stack to reach the height of a 10-storey building?
 answer: 15000
 unit: coins
 assumptions:
