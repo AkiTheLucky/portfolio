@@ -2,7 +2,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionConfig } from 'motion/react';
-import { useRef, useState, type CSSProperties } from 'react';
+import { useRef, useState, useEffect, type PointerEvent as ReactPointerEvent, type CSSProperties } from 'react';
 import { href, site } from '../config/site';
 import type { BlogEntry, EducationEntry, ExperienceEntry, FermiQuestion } from '../lib/types';
 import ClickCounter from './ClickCounter';
@@ -37,6 +37,71 @@ interface HomePageProps {
 export default function HomePage({ experiences, education, questions, posts, clickEndpoint }: HomePageProps) {
   const root = useRef<HTMLDivElement>(null);
   const [nameWeight, setNameWeight] = useState(0.2);
+  const gauge = useRef<HTMLSpanElement>(null);
+  const gaugeInput = useRef<HTMLInputElement>(null);
+  const drag = useRef<{ pointerId: number; startX: number; scrubbing: boolean } | null>(null);
+  const [hint, setHint] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    try {
+      if (sessionStorage.getItem('gauge-hint-seen') === 'true') return;
+      sessionStorage.setItem('gauge-hint-seen', 'true');
+    } catch {
+      return;
+    }
+    setHint(true);
+    const timer = window.setTimeout(() => setHint(false), 2600);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  const weightFromClientX = (clientX: number): number => {
+    const element = gauge.current;
+    if (!element) return nameWeight;
+    const rect = element.getBoundingClientRect();
+    if (rect.width === 0) return nameWeight;
+    const viewX = ((clientX - rect.left) / rect.width) * 160;
+    return Math.min(1, Math.max(0, (viewX - 36) / 88));
+  };
+
+  const onGaugePointerDown = (event: ReactPointerEvent<HTMLSpanElement>) => {
+    if (event.button !== 0) return;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    gaugeInput.current?.focus({ preventScroll: true });
+    drag.current = { pointerId: event.pointerId, startX: event.clientX, scrubbing: false };
+    if (event.pointerType === 'mouse') {
+      drag.current.scrubbing = true;
+      setNameWeight(weightFromClientX(event.clientX));
+    }
+  };
+
+  const onGaugePointerMove = (event: ReactPointerEvent<HTMLSpanElement>) => {
+    const state = drag.current;
+    if (!state || state.pointerId !== event.pointerId) return;
+    if (!state.scrubbing) {
+      if (Math.abs(event.clientX - state.startX) < 4) return;
+      state.scrubbing = true;
+    }
+    setNameWeight(weightFromClientX(event.clientX));
+  };
+
+  const onGaugePointerUp = (event: ReactPointerEvent<HTMLSpanElement>) => {
+    const state = drag.current;
+    if (!state || state.pointerId !== event.pointerId) return;
+    if (!state.scrubbing) setNameWeight(weightFromClientX(event.clientX));
+    drag.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  const onGaugePointerCancel = (event: ReactPointerEvent<HTMLSpanElement>) => {
+    drag.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
 
   useGSAP(() => {
     const mm = gsap.matchMedia();
@@ -86,7 +151,14 @@ export default function HomePage({ experiences, education, questions, posts, cli
               </h1>
               <div className={styles.nameGauge}>
                 <span className={styles.scaleGlyphThin} aria-hidden="true">A</span>
-                <span className={styles.gauge}>
+                <span
+                  className={styles.gauge}
+                  ref={gauge}
+                  onPointerDown={onGaugePointerDown}
+                  onPointerMove={onGaugePointerMove}
+                  onPointerUp={onGaugePointerUp}
+                  onPointerCancel={onGaugePointerCancel}
+                >
                   <svg viewBox="0 0 160 56" role="presentation" aria-hidden="true" focusable="false">
                     <path className={styles.gaugeArc} d="M36 52 A44 44 0 0 1 124 52" />
                     <path className={styles.gaugeTicks} d="M43 52 A37 37 0 0 1 117 52" />
@@ -94,8 +166,14 @@ export default function HomePage({ experiences, education, questions, posts, cli
                       <line x1="80" y1="52" x2="80" y2="22" />
                       <circle cx="80" cy="52" r="3.5" />
                     </g>
+                    {hint && (
+                      <g className={styles.gaugeHintNeedle}>
+                        <line x1="80" y1="52" x2="80" y2="26" />
+                      </g>
+                    )}
                   </svg>
                   <input
+                    ref={gaugeInput}
                     className={styles.gaugeInput}
                     type="range"
                     min={0}
