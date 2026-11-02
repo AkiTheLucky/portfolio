@@ -3,19 +3,33 @@ import { getCollection } from 'astro:content';
 import ClickCounter from '../../components/ClickCounter';
 import FermiGame from '../../components/FermiGame';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { href } from '../../config/site';
 
 const questions = (await getCollection('fermi')).map((entry) => ({
   id: entry.id,
   ...entry.data,
   explanation: entry.body?.trim() || '',
 }));
+
+const cryptTerm = 'https://crypt-term-flask.onrender.com/';
 ---
-<BaseLayout title="Play — Akram Naser" description="A daily Fermi question and a needlessly collaborative click counter.">
+<BaseLayout title="Play — Akram Naser" description="crypTerm, a daily Fermi question, and a needlessly collaborative click counter.">
   <header class="page-hero shell">
     <h1>After work.</h1>
   </header>
   <section class="page-content shell" aria-labelledby="play-experiences-heading">
     <h2 id="play-experiences-heading" class="sr-only">Interactive experiences</h2>
+    <a class="game-card" href={cryptTerm} target="_blank" rel="noopener noreferrer" aria-label="Play crypTerm, a daily cryptex word game (opens in a new tab)">
+      <span class="game-card__shot">
+        <img src={href('games/cryptterm.png')} alt="" width="1393" height="811" loading="lazy" decoding="async" />
+      </span>
+      <span class="game-card__body">
+        <span class="game-card__kicker">Daily word game · external ↗</span>
+        <h2 class="game-card__title">crypTerm</h2>
+        <p class="game-card__copy">Rotate seven columns of a cryptex until the hidden word lines up. Timed runs, a hint button, an archive, and a leaderboard for the day.</p>
+        <span class="game-card__cta">Play crypTerm ↗</span>
+      </span>
+    </a>
     <div class="card-grid">
       <FermiGame client:load questions={questions} />
       <ClickCounter client:load endpoint={import.meta.env.PUBLIC_CLICK_COUNTER_URL || ''} />

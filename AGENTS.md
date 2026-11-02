@@ -38,7 +38,7 @@ Always follow these non-negotiable rules when working on Akram Naser's portfolio
 
 ## 4. Content Rules
 - No numbered labels in section headers or decorative index numbers inside cards/headings.
-- Keep only the Fermi game and click counter as interactive extras; do not re-add novelty widget toys unless explicitly requested.
+- Keep the playroom to the Fermi game, the click counter, and the external crypTerm link; do not re-add novelty widget toys unless explicitly requested.
 - There is no floating bottom-right quick menu. Top navigation is sufficient.
 - The “What I can help with” process section was removed; do not restore it without a new approved concept.
 - Hero video: `blue_crink` for light mode, `slide_across` for dark mode. Hide video under reduced motion and retain the static artwork fallback.
