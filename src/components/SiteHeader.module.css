@@ -13,8 +13,8 @@
 .menuButton { display: none; padding-inline: 0.85rem; font-family: var(--modelo); font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
 .mobileMenu { position: fixed; z-index: 90; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 7rem var(--page-pad) 3rem; background: var(--paper); color: var(--ink); }
 .mobileMenu nav { display: grid; gap: 0.5rem; }
-.mobileMenu nav a { display: flex; align-items: baseline; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-raised); color: var(--ink); font-family: var(--modelo); font-size: clamp(1.8rem, 8vw, 2.8rem); font-weight: 700; line-height: 1; text-decoration: none; text-transform: uppercase; }
-.mobileMenu nav a span { color: var(--accent-text); font-family: var(--mono); font-size: 0.78rem; }
+.mobileMenu nav a { display: flex; align-items: baseline; padding: 1rem 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-raised); color: var(--ink); font-family: var(--modelo); font-size: clamp(1.8rem, 8vw, 2.8rem); font-weight: 700; line-height: 1; text-decoration: none; text-transform: uppercase; }
+.mobileMenu nav a[aria-current='page'] { border-color: var(--accent-fill); color: var(--accent-text); }
 .github { margin-top: 2rem; color: var(--accent-text); font-size: 0.92rem; font-weight: 600; }
 @media (max-width: 760px) {
   .header { padding-top: 0.65rem; }
