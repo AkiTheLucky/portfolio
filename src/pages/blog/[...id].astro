@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 ---
-<BaseLayout title={`${post.data.title} — Akram Naser`} description={post.data.description}>
+<BaseLayout title={`${post.data.title} — Akram Naser`} description={post.data.description} type="article" publishedTime={post.data.pubDate.toISOString()}>
   <article class="page-content shell prose">
     <p class="prose-meta"><a href={href('blog')}>Blog</a> · <time datetime={post.data.pubDate.toISOString()}>{new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(post.data.pubDate)}</time></p>
     <h1>{post.data.title}</h1>
