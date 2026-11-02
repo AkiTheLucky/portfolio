@@ -21,7 +21,7 @@ Yen probably feels that the only way to convince internal and external stakehold
 
 We will all see how this unfolds. Maybe Proton is doing what's right, like everyone else who is pushing AI on their SWEs, or we will see a very foreseeable fall of yet another "let's go AI first" protégé.
 
-Klarna famously tried to make their CS team redundant with AI and, also famously, rehired them quietly.
+[Klarna](https://www.entrepreneur.com/business-news/klarna-ceo-reverses-course-by-hiring-more-humans-not-ai/491396) famously tried to make their CS team redundant with AI and, also famously, rehired them quietly.
 
 I think we are in an unprecedented time and none of us can tell who is a lumberjack with a new chainsaw or a horse that gets replaced by a car.
 
