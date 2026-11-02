@@ -15,7 +15,6 @@
     "@astrojs/mdx": "latest",
     "@astrojs/react": "latest",
     "@astrojs/sitemap": "latest",
-    "@fontsource-variable/manrope": "latest",
     "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
     "@gsap/react": "latest",
     "astro": "latest",

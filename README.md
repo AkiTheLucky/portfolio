@@ -38,7 +38,7 @@ Content uses Astro collections and Markdown/MDX:
 - `src/content/fermi/` — daily estimation questions; frontmatter contains the answer and assumptions, and the body contains the explanation.
 - `src/content/blog/` — MDX blog posts.
 
-To publish a post, copy `src/content/blog/_template.mdx` to a descriptive filename such as `better-ai-use-cases.mdx`, replace the content, set the publication date, and change `draft: true` to `draft: false`. Committing and pushing to `main` starts the deployment workflow. You can also create and edit these files through GitHub's web interface.
+To publish a post, copy `src/content/blog/_2026-10-30-post-title.mdx` to a descriptive filename such as `2026-11-04-better-ai-use-cases.mdx`, replace the content, set the publication date, and change `draft: true` to `draft: false`. Committing and pushing to `main` starts the deployment workflow. You can also create and edit these files through GitHub's web interface.
 
 Site identity and public social links live in `src/config/site.ts`.
 
