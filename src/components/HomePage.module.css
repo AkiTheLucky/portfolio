@@ -22,6 +22,7 @@
   background-size: cover;
   pointer-events: none;
   z-index: -2;
+  transition: opacity 900ms ease;
 }
 
 .heroSection::before {
@@ -42,6 +43,13 @@
 
 :root[data-theme='dark'] .heroSection::after {
   background-image: linear-gradient(rgba(8, 12, 18, 0.82), rgba(8, 12, 18, 0.96)), var(--art-hero-b);
+}
+
+/* Once the hero video is painting, the static artwork plate cross-fades out.
+   It stays in place for pre-hydration paint and prefers-reduced-motion. */
+.heroSection[data-hero-video='ready']::before,
+.heroSection[data-hero-video='ready']::after {
+  opacity: 0;
 }
 
 .hero {

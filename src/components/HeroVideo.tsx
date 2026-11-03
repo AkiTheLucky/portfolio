@@ -5,7 +5,12 @@ import { href } from '../config/site';
 import type { Theme } from '../lib/theme';
 import styles from './HeroVideo.module.css';
 
-export default function HeroVideo() {
+interface Props {
+  /** Reports whether the video is actually painting pixels, so the host can drop its static artwork plate. */
+  onActiveChange?: (active: boolean) => void;
+}
+
+export default function HeroVideo({ onActiveChange }: Props) {
   const [theme, setTheme] = useState<Theme | null>(null);
   const [reduced, setReduced] = useState(false);
   const [ready, setReady] = useState(false);
@@ -37,6 +42,10 @@ export default function HeroVideo() {
       document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
+
+  useEffect(() => {
+    onActiveChange?.(theme !== null && !reduced && ready);
+  }, [onActiveChange, theme, reduced, ready]);
 
   if (!theme || reduced) return null;
 

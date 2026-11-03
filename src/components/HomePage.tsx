@@ -41,6 +41,7 @@ export default function HomePage({ experiences, education, questions, posts, cli
   const gaugeInput = useRef<HTMLInputElement>(null);
   const drag = useRef<{ pointerId: number; startX: number; scrubbing: boolean } | null>(null);
   const [hint, setHint] = useState(false);
+  const [heroVideoActive, setHeroVideoActive] = useState(false);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -136,9 +137,10 @@ export default function HomePage({ experiences, education, questions, posts, cli
           id="hero"
           className={styles.heroSection}
           aria-labelledby="hero-title"
+          data-hero-video={heroVideoActive ? 'ready' : undefined}
           style={{ '--name-density': nameWeight } as CSSProperties}
         >
-          <HeroVideo />
+          <HeroVideo onActiveChange={setHeroVideoActive} />
           <div className={`shell ${styles.hero}`}>
             <div className={styles.heroInner}>
               <h1
