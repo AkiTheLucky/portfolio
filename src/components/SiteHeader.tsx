@@ -1,6 +1,7 @@
 import { AnimatePresence, MotionConfig, motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { href, site } from '../config/site';
+import { installNaserConsole } from '../lib/naser-console';
 import { toggleTheme, type Theme } from '../lib/theme';
 import styles from './SiteHeader.module.css';
 
@@ -37,6 +38,10 @@ export default function SiteHeader({ currentPath }: { currentPath: string }) {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('themechange', onTheme);
     };
+  }, []);
+
+  useEffect(() => {
+    installNaserConsole();
   }, []);
 
   useEffect(() => {

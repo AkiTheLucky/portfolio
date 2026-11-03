@@ -5,6 +5,7 @@ import { MotionConfig } from 'motion/react';
 import { useRef, useState, useEffect, type PointerEvent as ReactPointerEvent, type CSSProperties } from 'react';
 import { href, site } from '../config/site';
 import type { BlogEntry, EducationEntry, ExperienceEntry, FermiQuestion } from '../lib/types';
+import { GAUGE_EVENT, clampGauge } from '../lib/naser-console';
 import ClickCounter from './ClickCounter';
 import FermiGame from './FermiGame';
 import HeroVideo from './HeroVideo';
@@ -54,6 +55,17 @@ export default function HomePage({ experiences, education, questions, posts, cli
     setHint(true);
     const timer = window.setTimeout(() => setHint(false), 2600);
     return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const onGaugeCommand = (event: Event) => {
+      const value = (event as CustomEvent<number>).detail;
+      if (typeof value !== 'number') return;
+      setHint(false);
+      setNameWeight(clampGauge(value));
+    };
+    window.addEventListener(GAUGE_EVENT, onGaugeCommand);
+    return () => window.removeEventListener(GAUGE_EVENT, onGaugeCommand);
   }, []);
 
   const weightFromClientX = (clientX: number): number => {
